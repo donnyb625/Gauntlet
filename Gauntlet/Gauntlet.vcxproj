@@ -127,12 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoundsManager.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Gauntlet.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoundsManager.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SharedTypes.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Floor">
       <UniqueIdentifier>{5a80ef2b-7939-4287-951d-88f50cc59ce7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{2c354ab9-103a-48f8-9d2b-da5ee6f249e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{11d5d353-01cd-47fd-8f59-ca4cb8bf5347}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gauntlet.cpp">
@@ -30,12 +36,30 @@
     <ClCompile Include="Floor.cpp">
       <Filter>Source Files\Floor</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundsManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SharedTypes.h">
       <Filter>Header Files\Shared</Filter>
     </ClInclude>
     <ClInclude Include="Floor.h">
+      <Filter>Header Files\Floor</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundsManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
       <Filter>Header Files\Floor</Filter>
     </ClInclude>
   </ItemGroup>

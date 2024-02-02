@@ -36,7 +36,7 @@ enum class TileType
 	WALL,
 	WALL_BREAKABLE,
 	TELEPORTER,
-	TRAP,
+	TRAP, // Is a wall
 	DOOR
 };
 
