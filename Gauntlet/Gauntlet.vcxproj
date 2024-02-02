@@ -127,7 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Gauntlet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="SharedTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
