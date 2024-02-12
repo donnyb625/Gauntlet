@@ -131,18 +131,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BoundsManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Gauntlet.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoundsManager.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SharedTypes.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Gauntlet.rc" />
