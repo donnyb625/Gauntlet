@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Managers">
       <UniqueIdentifier>{11d5d353-01cd-47fd-8f59-ca4cb8bf5347}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\NewFilter1">
+      <UniqueIdentifier>{aa3c38f4-99b5-432c-b25e-f82d1c68c3f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gauntlet.cpp">
