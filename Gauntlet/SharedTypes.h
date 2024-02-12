@@ -79,6 +79,10 @@ struct UsableResource
 	Resource const * const resource;
 	const int count;// Number of animation frames / sounds
 	const ResourceType type;
+
+	UsableResource(Resource* initResource, int initCount,
+		ResourceType initType)
+		: resource(initResource), count(initCount), type(initType) {}
 };
 
 // A region containing tiles, this is defined for loading levels using the
@@ -100,18 +104,13 @@ struct TileRegion
 		Tile TileArray[2];
 	};
 
-	Point Alpha;
-	Point Beta;
-	RegionType Type;
-	RegionTile Tiles;
-};
+	const Point alpha;
+	const Point beta;
+	const RegionType type;
+	RegionTile tiles;
 
-
-/* If needed, uncomment
-struct Bound
-{
-	Point Alpha;
-	Point Beta;
-	BoundType Type;
+	TileRegion(Point upperLeft, Point lowerRight,
+		RegionType pattern, RegionTile patternTile)
+		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
+		{}
 };
-*/
