@@ -1,6 +1,11 @@
 #pragma once
+#include "Tile.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+
 /*
-	Contains many shared enumerations / structures used throughout the program
+	Contains many shared enumerations / structures used throughout the program,
 	especially those that are used for map loading given the heavy reliance on
 	pseudo-compression to lower the computational effort for collision.
 */
@@ -20,48 +25,81 @@ enum class RegionType
 };
 
 
-/* If needed, uncomment
-enum class BoundType
-{
-	SOLID,
-	BOX,
-	DIAGONAL
-};
-*/
 
-
-// The type of tile that should be referenced
-enum class TileType
+enum class ResourceType
 {
-	WALL,
-	WALL_BREAKABLE,
-	TELEPORTER,
-	TRAP, // Is a wall
-	DOOR
+	MOVE,
+	ATTACK,
+	SPAWN,
+	BREAK,
+	AMBIENT,
+	GENERIC
 };
 
 
-// Used to support patterns that require multiple tiles for generation
-// IE CHECKERBOARD_TWO_ROW / ALTERNATE
-union RegionTile
+// List of resource holders, IE things that can request their resources
+// This is subject to change.
+enum class ResourceIdentifier
 {
-	TileType Tile;
-	TileType Tiles[2];
+	DEMON_SPAWNER,
+	GHOST_SPAWNER,
+	GRUNT_SPAWNER,
+	LOBBER_SPAWNER,
+	SORCERER_SPAWNER,
+	THIEF_SPAWNER,
+	DEMON,
+	GHOST,
+	GRUNT,
+	LOBBER,
+	SORCERER,
+	THIEF,
+	KEY,
+	BOMB_POTION,
+	INVISIBILITY_POTION,
+	EXTRA_POWER_POTION,
+	MEAT_1,
+	MEAT_2,
+	BOOZE,
+	POISON
 };
 
 
-// A simple 2d point on a plane
-struct Point
+// A resource that is used by various classes for textures and sounds
+struct UsableResource
 {
-	double x;
-	double y;
-};
+	// This stores either a sound or a texture
+	union Resource
+	{
+		sf::SoundBuffer sound;
+		sf::Texture texture;
+	};
 
+	// It cannot modify any of the data not point anywhere else
+	// only access what it was given
+	Resource const * const resource;
+	const int count;// Number of animation frames / sounds
+	const ResourceType type;
+};
 
 // A region containing tiles, this is defined for loading levels using the
 // Compression we use.
 struct TileRegion
 {
+	// A simple 2d point on a plane
+	struct Point
+	{
+		double x;
+		double y;
+	};
+
+	// Used to support patterns that require multiple tiles for generation
+	// IE CHECKERBOARD_TWO_ROW / ALTERNATE
+	union RegionTile
+	{
+		Tile SingleTile;
+		Tile TileArray[2];
+	};
+
 	Point Alpha;
 	Point Beta;
 	RegionType Type;
