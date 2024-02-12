@@ -104,9 +104,9 @@ struct TileRegion
 		Tile TileArray[2];
 	};
 
-	Point alpha;
-	Point beta;
-	RegionType type;
+	const Point alpha;
+	const Point beta;
+	const RegionType type;
 	RegionTile tiles;
 
 	TileRegion(Point upperLeft, Point lowerRight,
@@ -114,13 +114,3 @@ struct TileRegion
 		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
 		{}
 };
-
-
-/* If needed, uncomment
-struct Bound
-{
-	Point Alpha;
-	Point Beta;
-	BoundType Type;
-};
-*/
