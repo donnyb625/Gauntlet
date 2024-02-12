@@ -26,4 +26,3 @@ protected:
 	UsableResource* textures = nullptr;
 	sf::Sprite* animationFrames = nullptr;
 };
-
