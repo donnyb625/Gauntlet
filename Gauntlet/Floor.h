@@ -6,11 +6,12 @@ class Floor
 public:
 	Floor();
 	~Floor();
+
 	void draw();
 	void tick();
 
 private:
-	Tile tiles[];
+	Tile* tiles;
 
 	void destroyTile();
 	void spawnEntity();
