@@ -9,6 +9,8 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
+	UsableResource getSound(ResourceIdentifier consumerID, ResourceType type);
+	UsableResource getTexture(ResourceIdentifier consumerID, ResourceType type);
 
 private:
 	struct ManagedResource
@@ -23,5 +25,8 @@ private:
 
 	ManagedResource* textures;
 	ManagedResource* sounds;
+
+
+	void loadResources();
 };
 
