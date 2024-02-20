@@ -1,7 +1,11 @@
 #include "Game.h"
+#include "Player.h"
+#include "Enemy.h"
+#include "Projectile.h"
+#include "TileEntity.h"
 
 
-// Constructor for 
+// Starts the timer and initializes the entities.
 Game::Game()
 {
 	timer.restart();
@@ -17,23 +21,59 @@ Game::Game()
 Game::~Game()
 {
 	for (int i = 0; i < maxEntities; i++)
-		delete entities[i];
+		delete entities[i]; // Calling delete on nullptr is safe.
 	delete[] entities;
 }
 
+
+
 void Game::start()
 {
+	// Start the game
+
+	// Presumably load the floor and entities into memory
 }
 
 void Game::tick()
 {
+	Player* isPlayer = nullptr;
+	Enemy* isEnemy = nullptr;
+	Projectile* isProjectile = nullptr;
+	TileEntity* isTileEntity = nullptr;
+	sf::Sprite toDraw;
+
 	deltatime = timer.getElapsedTime().asMilliseconds();
 	timer.restart();
 
-
 	for (int i = 0; i < totalEntities; i++)
 	{
-		
+		isPlayer = dynamic_cast<Player*>(entities[i]);
+		isEnemy = dynamic_cast<Enemy*>(entities[i]);
+		isProjectile = dynamic_cast<Projectile*>(entities[i]);
+		isTileEntity = dynamic_cast<TileEntity*>(entities[i]);
+			
+		// Is Player
+		if (isPlayer)
+		{
+			isPlayer->tick();
+			toDraw = isPlayer->draw();
+		}
+		else if (isEnemy)
+		{
+			isEnemy->tick();
+			toDraw = isEnemy->draw();
+		}
+		else if (isProjectile)
+		{
+			isProjectile->tick();
+			toDraw = isProjectile->draw();
+		}
+		else if (isTileEntity)
+		{
+			isTileEntity->tick();
+			toDraw = isTileEntity->draw();
+		}
+		// Else is nullptr
 	}
 }
 
