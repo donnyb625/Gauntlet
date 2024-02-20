@@ -17,7 +17,7 @@ public:
 		AXE
 	};
 
-	Projectile(ProjectileType projectile);
+	Projectile(ProjectileType type);
 	~Projectile();
 
 private:
