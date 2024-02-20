@@ -16,8 +16,10 @@ public:
 	};
 
 	Tile(TileType tile);
+	~Tile();
 
 	bool tick();
+	void draw();
 private:
 };
 
