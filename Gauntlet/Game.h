@@ -16,10 +16,11 @@ public:
 
 private:
 	double deltatime = 0;
+	int totalEntities = 0, maxEntities = 32;
 	ResourceManager resourceManager;
 	BoundsManager boundsManager;
 	Floor floor;
-	Entity* entities;
+	Entity** entities;
 	sf::Clock timer;
 
 	void tick();
