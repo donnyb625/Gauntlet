@@ -25,6 +25,6 @@ private:
 
 	void tick();
 	void entityTick();
-	void draw();
+	void draw(sf::RenderWindow& window);
 };
 

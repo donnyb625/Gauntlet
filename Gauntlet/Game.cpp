@@ -30,8 +30,26 @@ Game::~Game()
 void Game::start()
 {
 	// Start the game
+	sf::RenderWindow window(sf::VideoMode(720, 960), "Gauntlet");
+
 
 	// Presumably load the floor and entities into memory
+
+	while (window.isOpen())
+	{
+		sf::Event event;
+
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+		}
+	}
+
+	tick();
+
+	window.clear();
+	draw(window);
 }
 
 void Game::tick()
@@ -81,6 +99,6 @@ void Game::entityTick()
 {
 }
 
-void Game::draw()
+void Game::draw(sf::RenderWindow& window)
 {
 }
