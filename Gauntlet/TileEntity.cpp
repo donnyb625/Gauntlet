@@ -1,7 +1,8 @@
 #include "TileEntity.h"
 
 
-TileEntity::TileEntity(TileType type)
+TileEntity::TileEntity(TileType type, ResourceManager* resManInit,
+	BoundsManager* boundManInit) : Entity(resManInit, boundManInit)
 {
 
 }
@@ -10,6 +11,15 @@ TileEntity::TileEntity(TileType type)
 TileEntity::~TileEntity()
 {
 
+}
+
+void TileEntity::tick()
+{
+}
+
+sf::Sprite TileEntity::draw()
+{
+	return sf::Sprite();
 }
 
 

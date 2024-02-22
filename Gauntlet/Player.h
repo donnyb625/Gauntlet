@@ -14,10 +14,6 @@ public:
 		WIZARD
 	};
 
-	void tick();
-	sf::Sprite draw();
-
-
 	struct PlayerStats 
 	{
 		int healthPoints;
@@ -29,9 +25,12 @@ public:
 		int speed;
 	};
 
-	Player(PlayerType type, PlayerStats stats);
+	Player(PlayerType type, PlayerStats stats, ResourceManager* resManInit,
+		BoundsManager* boundManInit);
 	~Player();
 
+	void tick();
+	sf::Sprite draw();
 	void eatFood();
 	void damage();
 	void attack();

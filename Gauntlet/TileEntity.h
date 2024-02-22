@@ -24,14 +24,16 @@ public:
 		POISON
 	};
 	
-	TileEntity(TileType type);
+	TileEntity(TileType type, ResourceManager* resManInit,
+		BoundsManager* boundManInit);
 	~TileEntity();
+
+	void tick();
+	sf::Sprite draw();
 
 	void isPoison(TileType type);
 	void method(TileType type);
 
-	void tick();
-	sf::Sprite draw();
 private:
 };
 
