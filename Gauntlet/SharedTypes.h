@@ -143,6 +143,6 @@ enum class Action
 // Used for sending actions to the player when ticking
 struct SentActions
 {
-	Action const const * const * actions; // Constant pointer to constant pointer(s) to constant data
+	Action const * const * const actions; // Constant pointer to constant pointer(s) to constant data
 	const int SIZE;
 };

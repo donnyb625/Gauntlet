@@ -11,6 +11,6 @@ public:
 	void setHitbox();
 
 private:
-	TileRegion* regions;
+	TileRegion** regions = nullptr;
 };
 
