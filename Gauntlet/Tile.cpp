@@ -15,7 +15,7 @@ Tile::~Tile()
 
 bool Tile::tick()
 {
-
+	return true;
 }
 
 

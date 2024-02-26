@@ -9,8 +9,10 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	UsableResource getSound(ResourceIdentifier consumerID, ResourceType type);
-	UsableResource getTexture(ResourceIdentifier consumerID, ResourceType type);
+	UsableResource getSound(
+		ResourceIdentifier consumerID, ResourceType type);
+	UsableResource getTexture(
+		ResourceIdentifier consumerID, ResourceType type);
 
 private:
 	struct ManagedResource
@@ -22,10 +24,12 @@ private:
 			UsableResource initResource, ResourceIdentifier initID)
 			: resource(initResource), identifier(initID) {}
 	};
+	// This is where the linker errors come from; they will resolve
+	// when we make this.
+	ManagedResource** textures = nullptr;
+	ManagedResource** sounds = nullptr;
 
-	ManagedResource* textures;
-	ManagedResource* sounds;
-
+	int totalTextures = 0, totalSounds = 0;
 
 	void loadResources();
 };

@@ -15,7 +15,7 @@ BoundsManager::~BoundsManager()
 
 bool BoundsManager::isColliding()
 {
-	bool colliding;
+	bool colliding = false;
 
 	return colliding;
 }
