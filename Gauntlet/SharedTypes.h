@@ -72,6 +72,11 @@ struct UsableResource
 	{
 		sf::SoundBuffer sound;
 		sf::Texture texture;
+
+		Resource(sf::SoundBuffer);
+		Resource(sf::Texture);
+
+		~Resource();
 	};
 
 	// It cannot modify any of the data not point anywhere else
@@ -84,6 +89,7 @@ struct UsableResource
 		ResourceType initType)
 		: resource(initResource), count(initCount), type(initType) {}
 };
+
 
 // A region containing tiles, this is defined for loading levels using the
 // Compression we use.
@@ -102,6 +108,8 @@ struct TileRegion
 	{
 		Tile SingleTile;
 		Tile TileArray[2];
+
+		~RegionTile();
 	};
 
 	const Point alpha;
@@ -113,4 +121,28 @@ struct TileRegion
 		RegionType pattern, RegionTile patternTile)
 		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
 		{}
+};
+
+
+// All of the possible actions that can be sent
+enum class Action
+{
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	NORTH_EAST,
+	SOUTH_EAST,
+	NORTH_WEST,
+	SOUTH_WEST,
+	SHOOT,
+	PICKUP, // Will require further implementation, generic for now
+};
+
+
+// Used for sending actions to the player when ticking
+struct SentActions
+{
+	Action const const * const * actions; // Constant pointer to constant pointer(s) to constant data
+	const int SIZE;
 };
