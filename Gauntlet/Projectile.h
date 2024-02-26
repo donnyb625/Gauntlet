@@ -17,8 +17,12 @@ public:
 		AXE
 	};
 
-	Projectile(ProjectileType type);
+	Projectile(ProjectileType type, ResourceManager* resManInit,
+		BoundsManager* boundManInit);
 	~Projectile();
+
+	void tick();
+	sf::Sprite draw();
 
 private:
 	double speed = 0;
