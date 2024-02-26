@@ -25,9 +25,11 @@ public:
 		int shotSpeed;
 	};
 	
-	Enemy(EnemyType type, EnemyStats stats);
+	Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
+		BoundsManager* boundManInit);
 	~Enemy();
 
+	void tick();
+	sf::Sprite draw();
 private:
-	
 };
