@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{988f3063-720b-414c-bb36-e302c9411f87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\FloorTextures">
+      <UniqueIdentifier>{d3b5d5e5-4c88-4641-aabf-e4edb0b3fc41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gauntlet.cpp">
@@ -112,5 +115,13 @@
     <ResourceCompile Include="Gauntlet.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-1-One.png">
+      <Filter>Resource Files\FloorTextures</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-2-Two.png">
+      <Filter>Resource Files\FloorTextures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
