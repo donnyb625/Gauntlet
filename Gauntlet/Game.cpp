@@ -46,13 +46,21 @@ void Game::start()
 		}
 	}
 
-	tick();
+	tick(window);
 
 	window.clear();
 	draw(window);
 }
 
-void Game::tick()
+void Game::tick(sf::RenderWindow& window)
+{
+	deltatime = timer.getElapsedTime().asMilliseconds();
+	timer.restart();
+
+	entityTick(window);
+}
+
+void Game::entityTick(sf::RenderWindow& window)
 {
 	Player* isPlayer = nullptr;
 	Enemy* isEnemy = nullptr;
@@ -60,16 +68,13 @@ void Game::tick()
 	TileEntity* isTileEntity = nullptr;
 	sf::Sprite toDraw;
 
-	deltatime = timer.getElapsedTime().asMilliseconds();
-	timer.restart();
-
 	for (int i = 0; i < totalEntities; i++)
 	{
 		isPlayer = dynamic_cast<Player*>(entities[i]);
 		isEnemy = dynamic_cast<Enemy*>(entities[i]);
 		isProjectile = dynamic_cast<Projectile*>(entities[i]);
 		isTileEntity = dynamic_cast<TileEntity*>(entities[i]);
-			
+
 		// Is Player
 		if (isPlayer)
 		{
@@ -91,13 +96,9 @@ void Game::tick()
 			isTileEntity->tick();
 			toDraw = isTileEntity->draw();
 		}
-		// Else is nullptr
-	}
-}
 
-void Game::entityTick()
-{
-}
+		window.draw(toDraw);
+	}
 
 void Game::draw(sf::RenderWindow& window)
 {

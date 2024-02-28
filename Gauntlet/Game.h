@@ -21,10 +21,11 @@ private:
 	BoundsManager boundsManager;
 	Floor floor;
 	Entity** entities;
+
 	sf::Clock timer;
 
-	void tick();
-	void entityTick();
+	void tick(sf::RenderWindow& window);
+	void entityTick(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
 };
 
