@@ -99,7 +99,11 @@ void Game::entityTick(sf::RenderWindow& window)
 
 		window.draw(toDraw);
 	}
+}
+
 
 void Game::draw(sf::RenderWindow& window)
 {
+	window.clear();
+	window.display();
 }
