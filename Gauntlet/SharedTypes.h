@@ -64,6 +64,19 @@ enum class ResourceIdentifier
 };
 
 
+// All of the consumable items
+enum class ConsumableType
+{
+	BOMB_POTION,
+	INVISIBILITY_POTION,
+	EXTRA_POWER_POTION,
+	MEAT_1,
+	MEAT_2,
+	BOOZE,
+	POISON
+};
+
+
 // A resource that is used by various classes for textures and sounds
 struct UsableResource
 {
@@ -82,7 +95,7 @@ struct UsableResource
 	// It cannot modify any of the data not point anywhere else
 	// only access what it was given
 	Resource const * const resource;
-	const int count;// Number of animation frames / sounds
+	const int count; // Number of animation frames / sounds
 	const ResourceType type;
 
 	UsableResource(Resource* initResource, int initCount,
@@ -145,4 +158,6 @@ struct SentActions
 {
 	Action const * const * const actions; // Constant pointer to constant pointer(s) to constant data
 	const int SIZE;
+
+	SentActions();
 };
