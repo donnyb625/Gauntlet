@@ -4,7 +4,17 @@
 Player::Player(PlayerType type, PlayerStats stats, ResourceManager* resManInit,
 	BoundsManager* boundManInit) : Entity(resManInit, boundManInit)
 {
+	switch (type)
+	{
+	case WARRIOR:
+		
+	case ELF:
 
+	case VALKYRIE:
+
+	case WIZARD:
+
+	}
 }
 
 Player::~Player()

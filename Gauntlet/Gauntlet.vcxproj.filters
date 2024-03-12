@@ -117,10 +117,13 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-1-One.png">
+    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-1.png">
       <Filter>Resource Files\FloorTextures</Filter>
     </Image>
-    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-2-Two.png">
+    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-2.png">
+      <Filter>Resource Files\FloorTextures</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Downloads\Gauntlet-Level-3.png">
       <Filter>Resource Files\FloorTextures</Filter>
     </Image>
   </ItemGroup>

@@ -17,7 +17,7 @@ Floor::~Floor()
 void Floor::draw(sf::RenderWindow& window)
 {
 	sf::Texture floorTexture;
-	floorTexture.loadFromFile("Gauntlet-Level-1-One.png");
+	floorTexture.loadFromFile("Gauntlet-Level-1.png");
 
 	sf::Sprite floor;
 
@@ -29,7 +29,7 @@ void Floor::tick()
 {
 
 }
-
+  
 
 void Floor::destroyTile(Tile::TileType type, Tile tile)
 {
