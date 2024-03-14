@@ -70,11 +70,11 @@ struct UsableResource
 	// This stores either a sound or a texture
 	union Resource
 	{
-		sf::SoundBuffer sound;
-		sf::Texture texture;
+		sf::SoundBuffer* sound;
+		sf::Texture* texture;
 
-		Resource(sf::SoundBuffer);
-		Resource(sf::Texture);
+		Resource(sf::SoundBuffer* s) : sound(s) {}
+		Resource(sf::Texture* t) : texture(t) {}
 
 		~Resource();
 	};
@@ -143,6 +143,6 @@ enum class Action
 // Used for sending actions to the player when ticking
 struct SentActions
 {
-	Action const * const * const actions; // Constant pointer to constant pointer(s) to constant data
+	Action const * const * const actions;
 	const int SIZE;
 };

@@ -24,10 +24,12 @@ private:
 			UsableResource initResource, ResourceIdentifier initID)
 			: resource(initResource), identifier(initID) {}
 	};
-	// This is where the linker errors come from; they will resolve
-	// when we make this.
-	ManagedResource** textures = nullptr;
-	ManagedResource** sounds = nullptr;
+
+	ManagedResource** managedTextures = nullptr;
+	ManagedResource** managedSounds = nullptr;
+
+	sf::Texture** textures = nullptr;
+	sf::SoundBuffer** sounds = nullptr;
 
 	int totalTextures = 0, totalSounds = 0;
 

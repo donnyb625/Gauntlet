@@ -13,7 +13,7 @@ Player::Player(PlayerType type, PlayerStats stats, ResourceManager* resManInit,
 	case VALKYRIE:
 
 	case WIZARD:
-
+		break;
 	}
 }
 
