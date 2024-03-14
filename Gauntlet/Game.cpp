@@ -32,7 +32,7 @@ Game::~Game()
 void Game::start()
 {
 	// Start the game
-	sf::RenderWindow window(sf::VideoMode(720, 960), "Gauntlet");
+	sf::RenderWindow window(sf::VideoMode(960, 720), "Gauntlet");
 
 
 	// Presumably load the floor and entities into memory
@@ -80,7 +80,7 @@ void Game::entityTick(sf::RenderWindow& window)
 		// Is Player
 		if (isPlayer)
 		{
-			isPlayer->tick();
+			isPlayer->tick(deltatime);
 			toDraw = isPlayer->draw();
 		}
 		else if (isEnemy)

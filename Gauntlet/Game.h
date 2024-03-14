@@ -25,8 +25,8 @@ private:
 	sf::Clock timer;
 
 
-	void tick();
-	void entityTick();
+	void tick(sf::RenderWindow& window);
+	void entityTick(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
 	void loadFloorData();
 
