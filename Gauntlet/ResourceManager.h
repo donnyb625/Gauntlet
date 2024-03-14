@@ -27,8 +27,11 @@ private:
 			: resource(initResource), identifier(initID) {}
 	};
 
-	ManagedResource** textures = nullptr;
-	ManagedResource** sounds = nullptr;
+	ManagedResource** managedTextures = nullptr;
+	ManagedResource** managedSounds = nullptr;
+
+	sf::Texture** textures = nullptr;
+	sf::SoundBuffer** sounds = nullptr;
 
 	int totalTextures = 0, totalSounds = 0;
 
