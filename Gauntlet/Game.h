@@ -28,6 +28,7 @@ private:
 	void tick(sf::RenderWindow& window);
 	void entityTick(sf::RenderWindow& window);
 	void draw(sf::RenderWindow& window);
+	void loadFloorData();
 
 	unsigned char readData(std::ifstream& file);
 	unsigned short readSize(std::ifstream& file);
