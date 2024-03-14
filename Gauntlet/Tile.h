@@ -11,7 +11,7 @@ public:
 		WALL,
 		WALL_BREAKABLE,
 		TELEPORTER,
-		TRAP, // Is a wall
+		TRAP, // Is a wall that breaks on a trigger
 		DOOR
 	};
 

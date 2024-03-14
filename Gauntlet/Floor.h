@@ -1,5 +1,5 @@
 #pragma once
-#include "Tile.h"
+#include "SharedTypes.h"
 
 class Floor
 {
@@ -9,10 +9,11 @@ public:
 
 	void draw();
 	void tick();
+	void setWindow(sf::RenderWindow& window);
 
 private:
 	Tile* tiles;
+	sf::RenderWindow* window = nullptr;
 
-	void destroyTile();
-	void spawnEntity();
+	void destroyTile(Tile::TileType type, Tile tile);
 };
