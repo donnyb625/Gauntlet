@@ -119,7 +119,7 @@ void Game::draw(sf::RenderWindow& window)
   Level Header:  ( 6 byte : Color Scheme   | 1 byte      : Wall Style
          \-----> | 1 byte : floor Style    | 2 byte      : Pattern Array Size )
   Level Data:    ( 1 byte : Pattern type   | 1 or 2 byte : Tile ID )
-  Entity Header: ( 2 byte : Total Entities)
+  Entity Header: ( 2 byte : Total Entities )
   Entity Data:   ( 1 byte : Entity Type ID | 2 byte      : Position)
 
 
@@ -133,9 +133,9 @@ void Game::draw(sf::RenderWindow& window)
   pattern. The Level Data is an array of patterns and tile IDs so that the
   level can be constructed effectively. After we have the Level Data we will
   have the Entity Header for that specific level. this creates the following
-  implicit sub-structure for every level:
+  implicit sub-structure:
 
-  Level Data | Entity Header | Entity Data
+  File Header | Level Header | [ Level Data | Entity Header | Entity Data ]
 
   Where the array of levels also holds the specific entity data for each one as
   well. The Entity Header and Entity Data will hold the number of entities and
