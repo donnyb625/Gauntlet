@@ -17,9 +17,9 @@ public:
 	struct PlayerStats 
 	{
 		int healthPoints;
-		const int healthGain;
 		int armor;
 		const int attackDamage;
+		const int healthGain;
 		const int shotSpeed;
 		const int magic;
 		const int speed;
