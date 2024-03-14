@@ -5,7 +5,7 @@ Player::Player(PlayerType type, ResourceManager* resManInit,
 	BoundsManager* boundManInit) : Entity(resManInit, boundManInit)
 {
 
-	// Set the stats based on thew type
+	// Set the stats based on the type
 	switch (type)
 	{
 	case PlayerType::ELF:
