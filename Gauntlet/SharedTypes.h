@@ -64,17 +64,30 @@ enum class ResourceIdentifier
 };
 
 
+// All of the consumable items
+enum class ConsumableType
+{
+	BOMB_POTION,
+	INVISIBILITY_POTION,
+	EXTRA_POWER_POTION,
+	MEAT_1,
+	MEAT_2,
+	BOOZE,
+	POISON
+};
+
+
 // A resource that is used by various classes for textures and sounds
 struct UsableResource
 {
 	// This stores either a sound or a texture
 	union Resource
 	{
-		sf::SoundBuffer sound;
-		sf::Texture texture;
+		sf::SoundBuffer* sound;
+		sf::Texture* texture;
 
-		Resource(sf::SoundBuffer);
-		Resource(sf::Texture);
+		Resource(sf::SoundBuffer* s) : sound(s) {}
+		Resource(sf::Texture* t) : texture(t) {}
 
 		~Resource();
 	};
@@ -82,7 +95,7 @@ struct UsableResource
 	// It cannot modify any of the data not point anywhere else
 	// only access what it was given
 	Resource const * const resource;
-	const int count;// Number of animation frames / sounds
+	const int count; // Number of animation frames / sounds
 	const ResourceType type;
 
 	UsableResource(Resource* initResource, int initCount,
@@ -143,6 +156,8 @@ enum class Action
 // Used for sending actions to the player when ticking
 struct SentActions
 {
-	Action const * const * const actions; // Constant pointer to constant pointer(s) to constant data
+	Action const * const * const actions;
 	const int SIZE;
+
+	SentActions();
 };

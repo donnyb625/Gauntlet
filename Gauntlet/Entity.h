@@ -14,7 +14,7 @@ protected:
 	Entity(ResourceManager* resourceMan, BoundsManager* boundsMan)
 		: resourceManager(resourceMan), boundsManager(boundsMan) {}
 
-	virtual void tick() = 0;
+	virtual void tick(double deltatime) = 0;
 	virtual sf::Sprite draw() = 0;
 	virtual void loadSprites() = 0;
 	virtual void loadSounds() = 0;

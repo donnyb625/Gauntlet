@@ -1,18 +1,19 @@
 #pragma once
 #include "SharedTypes.h"
-#include "Game.h"
 
 class Floor
 {
 public:
-	Floor(sf::RenderWindow& window);
+	Floor();
 	~Floor();
 
-	void draw(sf::RenderWindow& window);
+	void draw();
 	void tick();
+	void setWindow(sf::RenderWindow& window);
 
 private:
 	Tile* tiles;
+	sf::RenderWindow* window = nullptr;
 
 	void destroyTile(Tile::TileType type, Tile tile);
 };

@@ -21,10 +21,16 @@ private:
 	BoundsManager boundsManager;
 	Floor floor;
 	Entity** entities;
+
 	sf::Clock timer;
+
 
 	void tick();
 	void entityTick();
 	void draw(sf::RenderWindow& window);
+
+	unsigned char readData(std::ifstream& file);
+	unsigned short readSize(std::ifstream& file);
+	unsigned int readColor(std::ifstream& file);
 };
 

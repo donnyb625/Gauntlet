@@ -24,7 +24,7 @@ UsableResource ResourceManager::getSound(ResourceIdentifier consumerID,
 {
 	// Search through the loaded endries from the file for the specific id and type matchup
 
-	UsableResource::Resource* resource = new UsableResource::Resource(sf::SoundBuffer());
+	UsableResource::Resource* resource = new UsableResource::Resource(new sf::SoundBuffer());
 
 	return UsableResource(resource, 1, ResourceType::AMBIENT);
 }
@@ -35,7 +35,7 @@ UsableResource ResourceManager::getTexture(ResourceIdentifier consumerID,
 {
 	// Search through the loaded endries from the file for the specific id and type matchup
 
-	UsableResource::Resource* resource = new UsableResource::Resource(sf::Texture());
+	UsableResource::Resource* resource = new UsableResource::Resource(new sf::Texture());
 
 	return UsableResource(resource, 1, ResourceType::AMBIENT);
 }
