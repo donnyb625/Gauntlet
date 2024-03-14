@@ -1,6 +1,8 @@
 #pragma once
 
 #include "SharedTypes.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 class ResourceManager

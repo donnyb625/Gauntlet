@@ -21,6 +21,7 @@ private:
 	BoundsManager boundsManager;
 	Floor floor;
 	Entity** entities;
+
 	sf::Clock timer;
 
 

@@ -17,25 +17,29 @@ public:
 	struct PlayerStats 
 	{
 		int healthPoints;
-		int healthGain;
+		const int healthGain;
 		int armor;
-		int attackDamage;
-		int shotSpeed;
-		int magic;
-		int speed;
+		const int attackDamage;
+		const int shotSpeed;
+		const int magic;
+		const int speed;
 	};
 
-	Player(PlayerType type, PlayerStats stats, ResourceManager* resManInit,
+	Player(PlayerType type, ResourceManager* resManInit,
 		BoundsManager* boundManInit);
 	~Player();
 
-	void tick();
+	void tick(double deltatime);
+	void setActions(SentActions& newActions);
+
 	sf::Sprite draw();
-	void eatFood();
-	void damage();
+
+	void eatFood(ConsumableType consumable);
+	void damage(int value);
 	void attack();
 	void move();
 
 private:
-
+	Action** actions = nullptr;
+	PlayerStats stats;
 };
