@@ -21,16 +21,16 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 	switch (type)
 	{
 	case PlayerType::ELF:
-		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+		return PlayerStats(820, 120, 2, 2, 0, 3, 5);
 
 	case PlayerType::VALKYRIE:
-		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+		return PlayerStats(900, 100, 5, 3, 0, 2, 3);
 
 	case PlayerType::WARRIOR:
-		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+		return PlayerStats(980, 80, 4, 5, 0, 1, 2);
 
 	case PlayerType::WIZARD:
-		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+		return PlayerStats(800, 100, 1, 3, 0, 5, 3);
 	default:
 		throw std::invalid_argument("Invalid player type");
 	}
