@@ -23,17 +23,22 @@ public:
 		const int shotSpeed;
 		const int magic;
 		const int speed;
+
+		PlayerStats(int initHP, int initHG, int initArm, int initAD,
+			int initSS, int initMag, int initSpe)
+			: healthPoints(initHP), healthGain(initHG), armor(initArm),
+			attackDamage(initAD), shotSpeed(initSS), magic(initMag), speed(initSpe) {}
 	};
 
 	Player(PlayerType type, ResourceManager* resManInit,
 		BoundsManager* boundManInit);
 	~Player();
 
-	void tick(double deltatime);
-	void setActions(SentActions& newActions);
+	PlayerStats createInitialStats(PlayerType type);
 
 	sf::Sprite draw();
-
+	void tick(double deltatime);
+	void setActions(SentActions& newActions);
 	void eatFood(ConsumableType consumable);
 	void damage(int value);
 	void attack();

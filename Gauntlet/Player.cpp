@@ -2,30 +2,38 @@
 
 
 Player::Player(PlayerType type, ResourceManager* resManInit,
-	BoundsManager* boundManInit) : Entity(resManInit, boundManInit)
+	BoundsManager* boundManInit)
+	: Entity(resManInit, boundManInit),
+	  stats(createInitialStats(type))
 {
-
 	// Set the stats based on thew type
-	switch (type)
-	{
-	case PlayerType::ELF:
-		break;
-
-	case PlayerType::VALKYRIE:
-		break;
-
-	case PlayerType::WARRIOR:
-		break;
-
-	case PlayerType::WIZARD:
-		break;
-
-	}
 }
 
 Player::~Player()
 {
 
+}
+
+
+// Allows the construction of constant data in player stats.
+Player::PlayerStats Player::createInitialStats(PlayerType type)
+{
+	switch (type)
+	{
+	case PlayerType::ELF:
+		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+
+	case PlayerType::VALKYRIE:
+		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+
+	case PlayerType::WARRIOR:
+		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+
+	case PlayerType::WIZARD:
+		return PlayerStats(0, 0, 0, 0, 0, 0, 0);
+	default:
+		throw std::invalid_argument("Invalid player type");
+	}
 }
 
 
