@@ -5,6 +5,7 @@
 #include "TileEntity.h"
 #include <fstream>
 #include <iostream>
+#include "FileReader.h"
 
 
 // Starts the timer and initializes the entities.
@@ -151,6 +152,7 @@ void Game::loadFloorData()
 
 	if (file)
 	{
+		FileReader reader(file);
 	}
 	else
 		throw std::exception::exception("Could not open 'levelData.bin'!");
