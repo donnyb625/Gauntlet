@@ -12,7 +12,8 @@ public:
 		WALL_BREAKABLE,
 		TELEPORTER,
 		TRAP, // Is a wall that breaks on a trigger
-		DOOR
+		DOOR,
+		AIR
 	};
 
 	Tile(TileType tile);
