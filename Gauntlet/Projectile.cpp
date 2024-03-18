@@ -10,7 +10,7 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::tick()
+void Projectile::tick(double& deltatime)
 {
 }
 

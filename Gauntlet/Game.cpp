@@ -1,129 +1,85 @@
 #include "Game.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Projectile.h"
-#include "TileEntity.h"
-#include <fstream>
-#include <iostream>
-#include "FileReader.h"
 
 
-// Starts the timer and initializes the entities.
-Game::Game()
+// Starts the timer.
+Game::Game(sf::RenderWindow& initWindow) : window(&initWindow)
 {
 	timer.restart();
 
-	entities = new Entity*[maxEntities];
-
-	for (int i = 0; i < maxEntities; i++)
-		entities[i] = nullptr;
+	return;
 }
 
 
 // Frees the entities memory.
 Game::~Game()
 {
-	for (int i = 0; i < maxEntities; i++)
-		delete entities[i]; // Calling delete on nullptr is safe.
-	delete[] entities;
+	delete floor;
 }
 
 
 
 void Game::start()
 {
-	// Start the game
-	sf::RenderWindow window(sf::VideoMode(960, 720), "Gauntlet");
-
-
 	// Presumably load the floor and entities into memory
 
-	while (window.isOpen())
+	while (window->isOpen())
 	{
 		sf::Event event;
 
-		while (window.pollEvent(event))
+		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				window.close();
+				window->close();
 		}
 	}
 
-	tick(window);
-
-	window.clear();
-	draw(window);
+	tick();
+	draw();
 }
 
-void Game::tick(sf::RenderWindow& window)
+void Game::tick()
 {
+
+	floor->tick(deltatime);
+}
+
+void Game::draw()
+{
+	window->clear();
+	window->display();
 	deltatime = timer.getElapsedTime().asMilliseconds();
 	timer.restart();
-
-	entityTick(window);
 }
 
-void Game::entityTick(sf::RenderWindow& window)
-{
-	Player* isPlayer = nullptr;
-	Enemy* isEnemy = nullptr;
-	Projectile* isProjectile = nullptr;
-	TileEntity* isTileEntity = nullptr;
-	sf::Sprite toDraw;
 
-	for (int i = 0; i < totalEntities; i++)
+
+void Game::loadNextFloorData()
+{
+	Entity** entities = nullptr;
+	TileEntity* currentEntity = nullptr;
+	RegionType* patterns = nullptr;
+	TileEntity::TileType entityType;
+
+	floorFile = std::ifstream("levelData.bin", std::ios::binary);
+
+	if (floorFile)
 	{
-		isPlayer = dynamic_cast<Player*>(entities[i]);
-		isEnemy = dynamic_cast<Enemy*>(entities[i]);
-		isProjectile = dynamic_cast<Projectile*>(entities[i]);
-		isTileEntity = dynamic_cast<TileEntity*>(entities[i]);
+		FileReader reader(floorFile, true);
+		FileReader::RawLevelData* data = reader.readNextLevelData();
+		
+		entities = new Entity * [data->totalEntities + 1]; // Player Reserve
 
-		// Is Player
-		if (isPlayer)
+		for (int i = 0; i < data->totalEntities; i++)
 		{
-			isPlayer->tick(deltatime);
-			toDraw = isPlayer->draw();
-		}
-		else if (isEnemy)
-		{
-			isEnemy->tick();
-			toDraw = isEnemy->draw();
-		}
-		else if (isProjectile)
-		{
-			isProjectile->tick();
-			toDraw = isProjectile->draw();
-		}
-		else if (isTileEntity)
-		{
-			isTileEntity->tick();
-			toDraw = isTileEntity->draw();
+			// UNFINISHED; NEEDS TO HANDLE PLAYER RESERVATION
+			entities[i + 1] = new TileEntity(
+				data->entities[i].identification,
+				&resourceManager,
+				&boundsManager
+			);
+
 		}
 
-		window.draw(toDraw);
-	}
-}
-
-
-void Game::draw(sf::RenderWindow& window)
-{
-	window.clear();
-	window.display();
-}
-
-
-
-void Game::loadFloorData()
-{
-	unsigned char byte; // Stores data enumerations
-	unsigned short size; // Stores array sizes
-	unsigned int color; // For color schemes
-
-	std::ifstream file("levelData.bin", std::ios::binary);
-
-	if (file)
-	{
-		FileReader reader(file);
 	}
 	else
 		throw std::exception::exception("Could not open 'levelData.bin'!");

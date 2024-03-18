@@ -21,7 +21,7 @@ public:
 		BoundsManager* boundManInit);
 	~Projectile();
 
-	void tick();
+	void tick(double& deltatime);
 	sf::Sprite draw();
 
 private:

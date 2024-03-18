@@ -23,13 +23,19 @@ public:
 		int attackDamage;
 		int speed;
 		int shotSpeed;
+
+		EnemyStats(int initHP, int initAD, int initSP, int initSS) :
+			healthPoints(initHP), attackDamage(initAD), speed(initSP), 
+			shotSpeed(initSS) {}
 	};
 	
 	Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
 		BoundsManager* boundManInit);
 	~Enemy();
 
-	void tick();
+	EnemyStats createInitStats(EnemyType type);
+
+	void tick(double& deltatime);
 	sf::Sprite draw();
 private:
 };

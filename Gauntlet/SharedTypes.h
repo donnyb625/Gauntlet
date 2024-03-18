@@ -77,6 +77,20 @@ enum class ConsumableType
 };
 
 
+// All the possible wall styles
+enum class WallStyle
+{
+	EXAMPLE_1
+};
+
+
+// All the possible wall styles
+enum class FloorStyle
+{
+	EXAMPLE_1
+};
+
+
 // A resource that is used by various classes for textures and sounds
 struct UsableResource
 {
