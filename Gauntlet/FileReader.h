@@ -1,6 +1,8 @@
 #pragma once
 #include <fstream>
 #include <iostream>
+#include "SharedTypes.h"
+#include "TileEntity.h"
 
 
 class FileReader
@@ -18,7 +20,7 @@ public:
 	// Holds the raw entity data for placing all default entities
 	struct RawEntityData
 	{
-		ResourceIdentifier identification;
+		TileEntity::TileType identification;
 		int x, y;
 
 		RawEntityData() : identification(), x(0), y(0) {}
@@ -42,10 +44,18 @@ public:
 			entities(nullptr) {}
 	};
 
+
+	FileReader(std::ifstream& initFile, bool filetype);
+	~FileReader();
+
+	RawLevelData* readNextLevelData();
+
+private:
 	// Holds all the extracted data
 	struct FloorData
 	{
 		unsigned char totalLevels;
+		int currentLevel = 0;
 
 		RawLevelData* levelData;
 
@@ -53,32 +63,10 @@ public:
 		FloorData() : levelData(nullptr), totalLevels(0) {}
 	};
 
-	FileReader(std::ifstream& initFile) : file(&initFile) {}
-	~FileReader();
-
-	FloorData* readLevelData();
-
-private:
-	enum LevelDataReadStage
-	{
-		FILE_HEADER_TOTAL_LEVELS,
-		LEVEL_HEADER_BG_COLOR,
-		LEVEL_HEADER_FG_COLOR,
-		LEVEL_HEADER_WALL_STYLE,
-		LEVEL_HEADER_FLOOR_STYLE,
-		LEVEL_HEADER_TOTAL_PATTERNS,
-		LEVEL_DATA_PATTERN_TYPE,
-		LEVEL_DATA_TILE_ID,
-		ENTITY_HEADER_TOTAL,
-		ENTITY_DATA_TYPE,
-		ENTITY_DATA_X_POS,
-		ENTITY_DATA_Y_POS,
-
-	};
-
 	std::ifstream* file;
+	bool filetype;
 
-	FloorData fDat;
+	FloorData floorData;
 
 	unsigned char readData();
 	unsigned short readSize();

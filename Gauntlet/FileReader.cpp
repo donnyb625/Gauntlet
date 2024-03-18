@@ -1,31 +1,41 @@
 #include "FileReader.h"
-#include "SharedTypes.h"
 
+
+FileReader::FileReader(std::ifstream& initFile, bool initFiletype)
+	: file(&initFile), filetype(initFiletype)
+{
+	if (filetype)
+	{
+		floorData.totalLevels = readData();
+
+		floorData.levelData = new RawLevelData[floorData.totalLevels];
+	}
+}
 
 FileReader::~FileReader()
 {
-	if (fDat.levelData) {
-		for (int i = 0; i < fDat.totalLevels; i++) {
-			if (fDat.levelData[i].entities) {
-				delete[] fDat.levelData[i].entities;
+	if (floorData.levelData) {
+		for (int i = 0; i < floorData.totalLevels; i++) {
+			if (floorData.levelData[i].entities) {
+				delete[] floorData.levelData[i].entities;
 			}
-			if (fDat.levelData[i].patterns) {
-				delete[] fDat.levelData[i].patterns;
+			if (floorData.levelData[i].patterns) {
+				delete[] floorData.levelData[i].patterns;
 			}
 		}
-		delete[] fDat.levelData;
+		delete[] floorData.levelData;
 	}
 }
 
 /*
-  levelfDat.bin Data Structure
+  levelfloorData.bin Data Structure
 
   File Header:   ( 1 byte : Total Levels )
   Level Header:  ( 6 byte : Color Scheme   | 1 byte      : Wall Style
 		 \-----> | 1 byte : floor Style    | 2 byte      : Pattern Array Size )
   Level Data:    ( 1 byte : Pattern type   | 1 or 2 byte : Tile ID )
   Entity Header: ( 2 byte : Total Entities )
-  Entity Data:   ( 1 byte : Entity Type ID | 2 byte      : Position)
+  Entity Data:   ( 1 byte : Entity Type ID | 2 bytes    : Position)
 
 
   The file header holds the number of levels that will actually be present in
@@ -46,134 +56,64 @@ FileReader::~FileReader()
   well. The Entity Header and Entity Data will hold the number of entities and
   respectively the ID and position of each one.
 */
-FileReader::FloorData* FileReader::readLevelData()
+FileReader::RawLevelData* FileReader::readNextLevelData()
 {
-	int currentLevel = 0, currentPattern = 0, currentEntity = 0;
-	int stage = FILE_HEADER_TOTAL_LEVELS;
-	/*
-		have structs that hold generic data for full types
-		have dynamic arrays of levels
-		have dynamic arrays of entities
-		set array sizes based upon size data stored in file
-	*/
+	int totalPatterns, totalEntities;
+	RawLevelData floor;
+	RegionType currentPatternType;
 
 
+	// Level Header
+	floorData.levelData[floorData.currentLevel].bgColor
+		= sf::Color(readColor() + 255); // 255 for alpha value
+	floorData.levelData[floorData.currentLevel].fgColor
+		= sf::Color(readColor() + 255); // 255 for alpha value
+	floorData.levelData[floorData.currentLevel].wallStyle
+		= static_cast<WallStyle>(readData());
+	floorData.levelData[floorData.currentLevel].floorStyle
+		= static_cast<FloorStyle>(readData());
+	floorData.levelData[floorData.currentLevel].totalPatterns = readSize();
+	totalPatterns = floorData.levelData[floorData.currentLevel].totalPatterns;
+	floorData.levelData[floorData.currentLevel].patterns
+		= new RawPatternData[totalPatterns];
 
-	// Runs for every stage, needs to be changed to a different loop
-	do
+	// Read all pattern data
+	for (int i = 0; i < totalPatterns; i++)
 	{
-		/*
-			This switch statement models stages in file decoding. These stages
-			may not happen in the exact order present; IE, it loops over every
-			level, and the contained patterns as well as contained entities by
-			changing the stage to the start of a level and incrementing a
-			counter to note how many it has processed.
-		*/
-		switch (stage)
+		floorData.levelData[floorData.currentLevel].patterns[i].patternType
+			= static_cast<RegionType>(readData());
+		currentPatternType = floorData.levelData[floorData.currentLevel]
+			.patterns[i].patternType;
+
+		floorData.levelData[floorData.currentLevel].patterns[i].tileIDs[0]
+			= static_cast<Tile::TileType>(readData());
+
+		// If pattern requires 2 tiles
+		if (currentPatternType == RegionType::CHECKERBOARD_TWO_ROW ||
+			currentPatternType == RegionType::CHECKERBOARD_TWO_ALTERNATE)
 		{
-		case FILE_HEADER_TOTAL_LEVELS:
-			fDat.totalLevels = readData();
-
-			// Initialize the array of level data
-			fDat.levelData = new RawLevelData[fDat.totalLevels];
-			break;
-
-		case LEVEL_HEADER_BG_COLOR:
-			fDat.levelData[currentLevel].bgColor = sf::Color(readColor());
-			break;
-
-		case LEVEL_HEADER_FG_COLOR:
-			fDat.levelData[currentLevel].fgColor = sf::Color(readColor());
-			break;
-
-		case LEVEL_HEADER_WALL_STYLE:
-			fDat.levelData[currentLevel].wallStyle =
-				static_cast<WallStyle>(readData());
-			break;
-
-		case LEVEL_HEADER_FLOOR_STYLE:
-			fDat.levelData[currentLevel].floorStyle =
-				static_cast<FloorStyle>(readData());
-			break;
-
-		case LEVEL_HEADER_TOTAL_PATTERNS:
-			fDat.levelData[currentLevel].totalPatterns = readSize();
-
-			//
-			fDat.levelData[currentLevel].patterns =
-				new RawPatternData[fDat.levelData[currentLevel].totalPatterns];
-			break;
-
-		case LEVEL_DATA_PATTERN_TYPE:
-			fDat.levelData[currentLevel].patterns[currentPattern].patternType =
-				static_cast<RegionType>(readData());
-			break;
-
-		case LEVEL_DATA_TILE_ID:
-			fDat.levelData[currentLevel].patterns[currentPattern].tileIDs[0] =
-				static_cast<Tile::TileType>(readData());
-
-			// Handle these seperately since they require 2 tiles.
-			if (
-				fDat.levelData[currentLevel].patterns[currentPattern]
-				.patternType == RegionType::CHECKERBOARD_TWO_ROW ||
-				fDat.levelData[currentLevel].patterns[currentPattern]
-				.patternType == RegionType::CHECKERBOARD_TWO_ALTERNATE
-				)
-			{
-				fDat.levelData[currentLevel].patterns[currentPattern]
-					.tileIDs[1] = static_cast<Tile::TileType>(readData());
-			}
-			break;
-
-		case ENTITY_HEADER_TOTAL:
-			fDat.levelData[currentLevel].totalEntities = readData();
-
-			// Initialize array for the total entities.
-			fDat.levelData[currentLevel].entities =
-				new RawEntityData[fDat.levelData[currentLevel].totalEntities];
-			break;
-
-		case ENTITY_DATA_TYPE:
-			fDat.levelData[currentLevel].entities[currentEntity]
-				.identification = static_cast<ResourceIdentifier>(readData());
-			break;
-
-		case ENTITY_DATA_X_POS:
-			fDat.levelData[currentLevel].entities[currentEntity]
-				.x = readData();
-			break;
-
-		case ENTITY_DATA_Y_POS:
-			fDat.levelData[currentLevel].entities[currentEntity]
-				.y = readData();
-			break;
-
-		default: 
-			throw std::invalid_argument("Invalid read state");
+			floorData.levelData[floorData.currentLevel].patterns[i].tileIDs[1]
+				= static_cast<Tile::TileType>(readData());
 		}
+	}
 
+	floorData.levelData[floorData.currentLevel].totalEntities = readSize();
+	totalEntities = floorData.levelData[floorData.currentLevel].totalEntities;
+	floorData.levelData[floorData.currentLevel].entities
+		= new RawEntityData[totalEntities];
 
-		// Adjust stage depending on if metadata states more present.
-		if (stage == LEVEL_DATA_TILE_ID &&
-			currentPattern < fDat.levelData[currentLevel].totalPatterns - 1)
-		{
-			currentPattern++;
-			stage = LEVEL_DATA_PATTERN_TYPE;
-		}
-		else if (stage == ENTITY_DATA_Y_POS &&
-			currentEntity < fDat.levelData[currentLevel].totalEntities -1)
-		{
-			currentEntity++;
-			stage = ENTITY_DATA_TYPE;
-		}
-		else if (stage == ENTITY_DATA_Y_POS &&
-			currentLevel < fDat.totalLevels - 1)
-		{
-			currentLevel++;
-			stage = LEVEL_HEADER_BG_COLOR;
-		}
-	} while (stage != ENTITY_DATA_Y_POS);
+	// Read all entity data
+	for (int i = 0; i < totalEntities; i++)
+	{
+		floorData.levelData[floorData.currentLevel].entities[i].identification
+			= static_cast<TileEntity::TileType>(readData());
+		floorData.levelData[floorData.currentLevel].entities[i].x
+			= readData();
+		floorData.levelData[floorData.currentLevel].entities[i].y
+			= readData();
+	}
+
+	return &floor;
 }
 
 unsigned char FileReader::readData()
