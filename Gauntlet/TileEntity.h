@@ -3,6 +3,8 @@
 #include "Entity.h"
 
 
+// Is an entity that serves the same basic purpose of a entity, just with
+// tile based characteristics.
 class TileEntity : public Entity
 {
 public:
@@ -28,12 +30,14 @@ public:
 		BoundsManager* boundManInit);
 	~TileEntity();
 
-	void tick();
+	void tick(double deltatime);
 	sf::Sprite draw();
 
 	void isPoison(TileType type);
-	void method(TileType type);
 
 private:
+	// Needs to be implemented. implementation requires resource manager.
+	void loadSprites();
+	void loadSounds();
 };
 

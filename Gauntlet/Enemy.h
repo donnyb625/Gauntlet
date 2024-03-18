@@ -35,7 +35,7 @@ public:
 
 	EnemyStats createInitStats(EnemyType type);
 
-	void tick();
+	void tick(double& deltatime);
 	sf::Sprite draw();
 private:
 };
