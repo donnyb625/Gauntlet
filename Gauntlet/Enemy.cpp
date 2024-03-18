@@ -36,7 +36,7 @@ Enemy::EnemyStats Enemy::createInitStats(EnemyType type)
 }
 
 
-void Enemy::tick()
+void Enemy::tick(double& deltatime)
 {
 }
 

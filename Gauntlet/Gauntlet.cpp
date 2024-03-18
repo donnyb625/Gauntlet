@@ -4,7 +4,8 @@
 // The entrypoint for Gauntlet
 int main()
 {
-	Game gauntlet;
+	sf::RenderWindow window(sf::VideoMode(960, 720), "Gauntlet");
+	Game gauntlet(window);
 
 	gauntlet.start();
 

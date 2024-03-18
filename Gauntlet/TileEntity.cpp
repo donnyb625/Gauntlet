@@ -13,7 +13,7 @@ TileEntity::~TileEntity()
 
 }
 
-void TileEntity::tick()
+void TileEntity::tick(double deltatime)
 {
 }
 
@@ -28,8 +28,10 @@ void TileEntity::isPoison(TileType type)
 
 }
 
-
-void TileEntity::method(TileType type)
+void TileEntity::loadSprites()
 {
+}
 
+void TileEntity::loadSounds()
+{
 }

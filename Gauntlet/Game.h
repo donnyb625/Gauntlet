@@ -3,31 +3,35 @@
 #include "ResourceManager.h"
 #include "BoundsManager.h"
 #include "Floor.h"
-#include "Entity.h"
+#include "Player.h"
 #include <SFML/Graphics.hpp>
+#include <fstream>
+#include <iostream>
+#include "FileReader.h"
 
 class Game
 {
 public:
-	Game();
+	Game(sf::RenderWindow& window);
 	~Game();
 
 	void start();
 
 private:
 	double deltatime = 0;
-	int totalEntities = 0, maxEntities = 32;
+	int currentFloor = 0, totalFloors;
 	ResourceManager resourceManager;
 	BoundsManager boundsManager;
-	Floor floor;
-	Entity** entities;
+	Floor* floor = nullptr;
+	Player* isPlayer = nullptr;
+	sf::RenderWindow* window;
+	std::ifstream floorFile;
 
 	sf::Clock timer;
 
 
-	void tick(sf::RenderWindow& window);
-	void entityTick(sf::RenderWindow& window);
-	void draw(sf::RenderWindow& window);
-	void loadFloorData();
+	void tick();
+	void draw();
+	void loadNextFloorData();
 };
 
