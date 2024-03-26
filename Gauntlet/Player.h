@@ -26,8 +26,9 @@ public:
 
 		PlayerStats(int initHP, int initHG, int initArm, int initAD,
 			int initSS, int initMag, int initSpe)
-			: healthPoints(initHP), healthGain(initHG), armor(initArm),
-			attackDamage(initAD), shotSpeed(initSS), magic(initMag), speed(initSpe) {}
+			: healthPoints(initHP), armor(initArm),attackDamage(initAD), 
+			healthGain(initHG), shotSpeed(initSS), magic(initMag),
+		    speed(initSpe) {}
 	};
 
 	Player(PlayerType type, ResourceManager* resManInit,
