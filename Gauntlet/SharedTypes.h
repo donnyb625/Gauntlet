@@ -14,6 +14,7 @@
 // used for compression and ease of importing from arcade to here.
 enum class RegionType
 {
+	NULL_TYPE,
 	SOLID,
 	BOX,
 	DIAGONAL_DISCONNECTED,
@@ -122,32 +123,58 @@ struct UsableResource
 // Compression we use.
 struct TileRegion
 {
+	TileRegion& operator=(const TileRegion& other)
+	{
+		if (this != &other)
+		{
+			alpha = other.alpha;
+			beta = other.beta;
+			type = other.type;
+			tiles = other.tiles;
+		}
+		return *this;
+	}
+
 	// A simple 2d point on a plane
 	struct Point
 	{
 		double x;
 		double y;
+
+		Point(unsigned char initX, unsigned char initY)
+			: x(initX), y(initY) {}
 	};
 
 	// Used to support patterns that require multiple tiles for generation
 	// IE CHECKERBOARD_TWO_ROW / ALTERNATE
 	union RegionTile
 	{
-		Tile SingleTile;
-		Tile TileArray[2];
+		Tile singleTile;
+		Tile tileArray[2];
 
+		RegionTile(Tile tile) : singleTile(tile) {}
+		RegionTile(Tile tile[2])
+		{
+			// Just copies the array
+			// Tile is a basic array, should be fine.
+			memcpy(tileArray, tile, sizeof(tileArray));
+		}
 		~RegionTile();
 	};
 
-	const Point alpha;
-	const Point beta;
-	const RegionType type;
+	Point alpha;
+	Point beta;
+	RegionType type;
 	RegionTile tiles;
 
 	TileRegion(Point upperLeft, Point lowerRight,
 		RegionType pattern, RegionTile patternTile)
 		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
 		{}
+
+	TileRegion();
+
+
 };
 
 
@@ -170,7 +197,7 @@ enum class Action
 // Used for sending actions to the player when ticking
 struct SentActions
 {
-	Action const * const * const actions;
+	Action const * const actions;
 	const int SIZE;
 
 	SentActions();
