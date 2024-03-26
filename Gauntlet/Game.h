@@ -23,7 +23,7 @@ private:
 	ResourceManager resourceManager;
 	BoundsManager boundsManager;
 	Floor* floor = nullptr;
-	Player* isPlayer = nullptr;
+	Player* player = nullptr;
 	sf::RenderWindow* window;
 	std::ifstream floorFile;
 
@@ -33,5 +33,6 @@ private:
 	void tick();
 	void draw();
 	void loadNextFloorData();
+	Action* adjustActionSize(Action* actions, int &size, bool set);
 };
 
