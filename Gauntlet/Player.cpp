@@ -60,7 +60,7 @@ void Player::eatFood(ConsumableType consumable)
 	case ConsumableType::MEAT_1:
 	case ConsumableType::MEAT_2:
 	case ConsumableType::BOOZE:
-		stats.healthPoints += stats.healthGain; // Is this correct?
+		stats.healthPoints += stats.healthGain; // Is this correct? Yes
 		break;
 
 	case ConsumableType::POISON:
@@ -91,5 +91,5 @@ void Player::attack()
 
 void Player::move()
 {
-
+	
 }
