@@ -1,20 +1,25 @@
 #pragma once
 #include <fstream>
 #include <iostream>
+#include <SFML/Graphics/Color.hpp>
 #include "SharedTypes.h"
 #include "TileEntity.h"
 
 
+// Reads either floor data into memory or reads sprite data for ResourceManager
 class FileReader
 {
 public:
 	// Holds the raw pattern information collected from the file for rebuilding
 	struct RawPatternData
 	{
+		unsigned char positionBuffer[4];
 		RegionType patternType;
 		Tile::TileType tileIDs[2];
 
-		RawPatternData() : patternType(), tileIDs() {}
+		RawPatternData() : 
+			positionBuffer{0,0,0,0}, patternType(RegionType::NULL_TYPE),
+			tileIDs{Tile::TileType::NULL_TYPE,Tile::TileType::NULL_TYPE} {}
 	};
 
 	// Holds the raw entity data for placing all default entities
@@ -23,7 +28,8 @@ public:
 		TileEntity::TileType identification;
 		int x, y;
 
-		RawEntityData() : identification(), x(0), y(0) {}
+		RawEntityData() : identification(TileEntity::TileType::NULL_TYPE),
+			x(0), y(0) {}
 	};
 
 	// Holds the raw data needed for constructing all levels
@@ -71,5 +77,8 @@ private:
 	unsigned char readData();
 	unsigned short readSize();
 	unsigned int readColor();
+	void readPosition(unsigned char out[4]);
+
+	
 };
 
