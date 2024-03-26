@@ -10,6 +10,7 @@ class Floor
 {
 public:
 	Floor(int initTotalEntities, Entity** initEntities,
+		int initTotalTiles, Tile* initTiles,
 		sf::RenderWindow* initWindow, sf::Color initBG, sf::Color initFG,
 		WallStyle initWallStyle, FloorStyle initFloorStyle);
 	~Floor();
@@ -18,7 +19,7 @@ public:
 	void tick(double& deltatime);
 
 private:
-	int totalEntities;
+	int totalEntities, totalTiles;
 	Tile* tiles = nullptr;
 	sf::RenderWindow* window = nullptr;
 	Entity** entities = nullptr;

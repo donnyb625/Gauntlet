@@ -2,11 +2,13 @@
 
 
 Floor::Floor(int initTotalEntities, Entity** initEntities,
+		int initTotalTiles, Tile* initTiles,
 	sf::RenderWindow* initWindow, sf::Color initBG, sf::Color initFG,
 	WallStyle initWallStyle, FloorStyle initFloorStyle)
-	: window(initWindow), entities(initEntities),
+	: window(initWindow), entities(initEntities), tiles(initTiles),
 	totalEntities(initTotalEntities), bgColor(initBG), fgColor(initFG),
-	wallStyle(initWallStyle), floorStyle(initFloorStyle)
+	wallStyle(initWallStyle), floorStyle(initFloorStyle),
+	totalTiles(initTotalTiles)
 {
 }
 
@@ -36,22 +38,34 @@ void Floor::tick(double& deltatime)
 
 void Floor::destroyTile(Tile::TileType type, Tile tile)
 {
+	/*
+	 * ###########################
+	 * # MAKE MORE ROBUST LOGIC  #
+	 * # SEARCH ADJCENT TILES    #
+	 * # USE DELETE AND DONT     #
+	 * # EXPLICITLY CALL THE     #
+	 * # DESTRUCTOR              #
+	 * ###########################
+	 */
 	switch(type) 
 	{
-		//If the tile is shot by a player, destroy tile
-		case Tile::WALL_BREAKABLE:
-			tile.~Tile();
-			break;
+	//If the tile is shot by a player, destroy tile
+	case Tile::WALL_BREAKABLE:
+		tile.~Tile();
+		break;
 
-		//If the trigger condition is met, destroy tile
-		case Tile::TRAP:
-			tile.~Tile();
-			break;
+	//If the trigger condition is met, destroy tile
+	case Tile::TRAP:
+		tile.~Tile();
+		break;
 
-		//If the player has a key in their inventory, destroy tile
-		case Tile::DOOR:
-			tile.~Tile();
-			break;
+	//If the player has a key in their inventory, destroy tile
+	case Tile::DOOR:
+		tile.~Tile();
+		break;
+
+	default:
+		break;
 	}
 }
 
