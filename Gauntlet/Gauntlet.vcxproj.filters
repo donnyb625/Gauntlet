@@ -37,6 +37,15 @@
     <Filter Include="Resource Files\FloorTextures">
       <UniqueIdentifier>{d3b5d5e5-4c88-4641-aabf-e4edb0b3fc41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{ecb44cae-faea-4064-ac6b-cfbfa973cee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{eda0cc97-d1a4-4393-b65b-6930f3d16382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{f54e6318-707d-4e8a-b1d8-608a10425604}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Gauntlet.cpp">
@@ -73,7 +82,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileReader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utility</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -114,7 +123,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="invalid_type.h">
+      <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

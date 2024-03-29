@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CppUnitTest.h"
+#include "gtest/gtest.h"
 #include "../Gauntlet/FileReader.h"
 #include "../Gauntlet/Tile.h"
 
