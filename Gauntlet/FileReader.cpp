@@ -57,10 +57,9 @@ FileReader::~FileReader()
   well. The Entity Header and Entity Data will hold the number of entities and
   respectively the ID and position of each one.
 */
-FileReader::RawLevelData* FileReader::readNextLevelData()
+FileReader::RawLevelData FileReader::readNextLevelData()
 {
 	int totalPatterns, totalEntities;
-	RawLevelData floor;
 	RegionType currentPatternType;
 
 
@@ -118,7 +117,9 @@ FileReader::RawLevelData* FileReader::readNextLevelData()
 			= readData();
 	}
 
-	return &floor;
+	floorData.currentLevel++;
+	
+	return floorData.levelData[floorData.currentLevel - 1];
 }
 
 unsigned char FileReader::readData()

@@ -1,7 +1,6 @@
 #pragma once
 #include <fstream>
 #include <iostream>
-#include <SFML/Graphics/Color.hpp>
 #include "SharedTypes.h"
 #include "TileEntity.h"
 
@@ -45,16 +44,16 @@ public:
 
 
 		RawLevelData()
-			: bgColor(), fgColor(), wallStyle(), floorStyle(),
-			totalPatterns(0), totalEntities(0), patterns(nullptr),
-			entities(nullptr) {}
+			: bgColor(0), fgColor(0), wallStyle(WallStyle::NULL_STYLE),
+			floorStyle(FloorStyle::NULL_STYLE), totalPatterns(0),
+			totalEntities(0), patterns(nullptr), entities(nullptr) {}
 	};
 
 
 	FileReader(std::ifstream& initFile, bool filetype);
 	~FileReader();
 
-	RawLevelData* readNextLevelData();
+	RawLevelData readNextLevelData();
 
 private:
 	// Holds all the extracted data
