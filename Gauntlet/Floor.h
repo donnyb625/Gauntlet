@@ -10,7 +10,7 @@ class Floor
 {
 public:
 	Floor(int initTotalEntities, Entity** initEntities,
-		int initTotalTiles, Tile* initTiles,
+		int initTotalTiles, TileRegion* initTiles,
 		sf::RenderWindow* initWindow, sf::Color initBG, sf::Color initFG,
 		WallStyle initWallStyle, FloorStyle initFloorStyle);
 	~Floor();
@@ -20,7 +20,7 @@ public:
 
 private:
 	int totalEntities, totalTiles;
-	Tile* tiles = nullptr;
+	Tile tiles[33][33];
 	sf::RenderWindow* window = nullptr;
 	Entity** entities = nullptr;
 	sf::Color bgColor, fgColor;
@@ -29,5 +29,6 @@ private:
 
 
 	void destroyTile(Tile::TileType type, Tile tile);
+	void patternToTiles(TileRegion* patterns, int size);
 	void entityTick(double& deltatime);
 };
