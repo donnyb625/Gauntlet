@@ -18,13 +18,14 @@ public:
 	};
 
 	Tile(TileType tile);
-	Tile() : tile(NULL_TYPE) {}
+	Tile() : type(NULL_TYPE) {}
 	~Tile();
-
-	TileType tile;
 	
 	bool tick();
 	void draw();
+	TileType getType();
 private:
+
+	TileType type;
 };
 
