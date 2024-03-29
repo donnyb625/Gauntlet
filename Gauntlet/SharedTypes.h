@@ -81,6 +81,7 @@ enum class ConsumableType
 // All the possible wall styles
 enum class WallStyle
 {
+	NULL_STYLE,
 	EXAMPLE_1
 };
 
@@ -88,6 +89,7 @@ enum class WallStyle
 // All the possible wall styles
 enum class FloorStyle
 {
+	NULL_STYLE,
 	EXAMPLE_1
 };
 
@@ -143,6 +145,8 @@ struct TileRegion
 
 		Point(unsigned char initX, unsigned char initY)
 			: x(initX), y(initY) {}
+
+		Point() : x(0), y(0) {}
 	};
 
 	// Used to support patterns that require multiple tiles for generation
@@ -156,10 +160,12 @@ struct TileRegion
 		RegionTile(Tile tile[2])
 		{
 			// Just copies the array
-			// Tile is a basic array, should be fine.
+			// Tile is a basic class, should be fine.
 			memcpy(tileArray, tile, sizeof(tileArray));
 		}
-		~RegionTile();
+		RegionTile() : singleTile(Tile(Tile::TileType::NULL_TYPE)) {};
+
+		~RegionTile() {};
 	};
 
 	Point alpha;
@@ -172,15 +178,14 @@ struct TileRegion
 		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
 		{}
 
-	TileRegion();
-
-
+	TileRegion() : type(RegionType::NULL_TYPE) {};
 };
 
 
 // All of the possible actions that can be sent
 enum class Action
 {
+	NULL_ACTION,
 	NORTH,
 	SOUTH,
 	EAST,
