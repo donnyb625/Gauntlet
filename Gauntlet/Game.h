@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include "FileReader.h"
+#include <cmath>
 
 class Game
 {
@@ -33,6 +34,9 @@ private:
 	void tick();
 	void draw();
 	void loadNextFloorData();
+	Action getJoystickDirection(const sf::Event::JoystickMoveEvent& joystickMove);
+	Action getKeyActionDirection(const sf::Event::KeyEvent& keyPressed);
 	Action* adjustActionSize(Action* actions, int &size, bool set);
+	SentActions cleanActions(Action*& actions, int &size);
 };
 

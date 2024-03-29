@@ -205,5 +205,6 @@ struct SentActions
 	Action const * const actions;
 	const int SIZE;
 
-	SentActions();
+	SentActions(Action* initActions, int initSize)
+		: actions(initActions), SIZE(initSize) {}
 };
