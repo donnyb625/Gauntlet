@@ -30,7 +30,7 @@ public:
 	};
 	
 	Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
-		BoundsManager* boundManInit);
+		BoundsManager* boundManInit, double initX, double initY);
 	~Enemy();
 
 	EnemyStats createInitStats(EnemyType type);

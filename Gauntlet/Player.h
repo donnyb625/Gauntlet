@@ -32,7 +32,7 @@ public:
 	};
 
 	Player(PlayerType type, ResourceManager* resManInit,
-		BoundsManager* boundManInit);
+		BoundsManager* boundManInit, double initX, double initY);
 	~Player();
 
 	PlayerStats createInitialStats(PlayerType type);
