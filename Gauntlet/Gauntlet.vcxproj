@@ -150,6 +150,7 @@
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="invalid_type.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="resource.h" />
