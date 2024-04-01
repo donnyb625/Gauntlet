@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Entity.h"
+#include "Animatable.h"
 
-
-class Enemy : public Entity
+class Enemy : public Entity, private Animatable
 {
 public:
 	enum EnemyType

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Entity.h"
+#include "Animatable.h"
 
-
-class Player : public Entity
+class Player : public Entity, private Animatable
 {
 public:
 	enum PlayerType
@@ -38,7 +38,7 @@ public:
 	PlayerStats createInitialStats(PlayerType type);
 
 	sf::Sprite draw();
-	void tick(double deltatime);
+	void tick(double deltatime, SentActions* actions);
 	void setActions(SentActions& newActions);
 	void eatFood(ConsumableType consumable);
 	void damage(int value);
