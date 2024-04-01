@@ -136,7 +136,9 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameLib.cpp" />
     <ClCompile Include="Gauntlet.cpp" />
+    <ClCompile Include="ImageExtractor.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -144,12 +146,15 @@
     <ClCompile Include="TileEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animatable.h" />
     <ClInclude Include="BoundsManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameLib.h" />
+    <ClInclude Include="ImageExtractor.h" />
     <ClInclude Include="invalid_type.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
