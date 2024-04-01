@@ -25,6 +25,5 @@ protected:
 	BoundsManager* boundsManager;
 	sf::Vector2<double> position;
 	UsableResource* sounds = nullptr;
-	UsableResource* textures = nullptr;
-	sf::Sprite* animationFrames = nullptr;
+	UsableResource* texture = nullptr;
 };
