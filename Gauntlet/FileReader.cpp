@@ -30,12 +30,13 @@ FileReader::~FileReader()
 /*
   levelfloorData.bin Data Structure
 
-  File Header:   ( 1 byte : Total Levels )
-  Level Header:  ( 6 byte : Color Scheme   | 1 byte      : Wall Style
-		 \-----> | 1 byte : floor Style    | 2 byte      : Pattern Array Size )
-  Level Data:    ( 1 byte : Pattern type   | 1 or 2 byte : Tile ID )
-  Entity Header: ( 2 byte : Total Entities )
-  Entity Data:   ( 1 byte : Entity Type ID | 2 bytes    : Position)
+  File Header:   ( 1 byte  : Total Levels )
+  Level Header:  ( 6 bytes : Color Scheme   | 1 byte     : Wall Style
+		 \-----> | 1 byte  : floor Style    | 2 bytes    : Pattern Array Size )
+  Level Data:    ( 1 byte  : Pattern type   | 1/2 bytes  : Tile ID
+		 \-----> | 4 bytes : Pattern Array Size )
+  Entity Header: ( 2 bytes : Total Entities )
+  Entity Data:   ( 1 byte  : Entity Type ID | 2 bytes    : Position)
 
 
   The file header holds the number of levels that will actually be present in
@@ -56,10 +57,9 @@ FileReader::~FileReader()
   well. The Entity Header and Entity Data will hold the number of entities and
   respectively the ID and position of each one.
 */
-FileReader::RawLevelData* FileReader::readNextLevelData()
+FileReader::RawLevelData FileReader::readNextLevelData()
 {
 	int totalPatterns, totalEntities;
-	RawLevelData floor;
 	RegionType currentPatternType;
 
 
@@ -95,6 +95,10 @@ FileReader::RawLevelData* FileReader::readNextLevelData()
 			floorData.levelData[floorData.currentLevel].patterns[i].tileIDs[1]
 				= static_cast<Tile::TileType>(readData());
 		}
+
+		// Read position from file
+		readPosition(floorData.levelData[floorData.currentLevel].patterns[i]
+			.positionBuffer);
 	}
 
 	floorData.levelData[floorData.currentLevel].totalEntities = readSize();
@@ -113,7 +117,9 @@ FileReader::RawLevelData* FileReader::readNextLevelData()
 			= readData();
 	}
 
-	return &floor;
+	floorData.currentLevel++;
+	
+	return floorData.levelData[floorData.currentLevel - 1];
 }
 
 unsigned char FileReader::readData()
@@ -137,4 +143,9 @@ unsigned int FileReader::readColor()
 
 	unsigned int result = buffer[0] | (buffer[1] << 8) | (buffer[2] << 16);
 	return result;
+}
+
+void FileReader::readPosition(unsigned char out[4])
+{
+	file->read(reinterpret_cast<char*>(out), 4); // Reading 4 bytes
 }

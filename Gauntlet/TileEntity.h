@@ -10,6 +10,7 @@ class TileEntity : public Entity
 public:
 	enum TileType
 	{
+		NULL_TYPE,
 		DEMON_S,
 		GHOST_S,
 		GRUNT_S,
@@ -27,7 +28,7 @@ public:
 	};
 	
 	TileEntity(TileType type, ResourceManager* resManInit,
-		BoundsManager* boundManInit);
+		int x, int y, BoundsManager* boundManInit);
 	~TileEntity();
 
 	void tick(double deltatime);
@@ -39,5 +40,7 @@ private:
 	// Needs to be implemented. implementation requires resource manager.
 	void loadSprites();
 	void loadSounds();
+
+	TileType type;
 };
 

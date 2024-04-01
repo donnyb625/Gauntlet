@@ -18,7 +18,7 @@ public:
 	};
 
 	Projectile(ProjectileType type, ResourceManager* resManInit,
-		BoundsManager* boundManInit);
+		BoundsManager* boundManInit, double initX, double initY);
 	~Projectile();
 
 	void tick(double& deltatime);

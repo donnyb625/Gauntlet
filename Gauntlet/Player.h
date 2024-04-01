@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Entity.h"
+#include "Animatable.h"
 
-
-class Player : public Entity
+class Player : public Entity, private Animatable
 {
 public:
 	enum PlayerType
@@ -26,18 +26,19 @@ public:
 
 		PlayerStats(int initHP, int initHG, int initArm, int initAD,
 			int initSS, int initMag, int initSpe)
-			: healthPoints(initHP), healthGain(initHG), armor(initArm),
-			attackDamage(initAD), shotSpeed(initSS), magic(initMag), speed(initSpe) {}
+			: healthPoints(initHP), armor(initArm),attackDamage(initAD), 
+			healthGain(initHG), shotSpeed(initSS), magic(initMag),
+		    speed(initSpe) {}
 	};
 
 	Player(PlayerType type, ResourceManager* resManInit,
-		BoundsManager* boundManInit);
+		BoundsManager* boundManInit, double initX, double initY);
 	~Player();
 
 	PlayerStats createInitialStats(PlayerType type);
 
 	sf::Sprite draw();
-	void tick(double deltatime);
+	void tick(double deltatime, SentActions* actions);
 	void setActions(SentActions& newActions);
 	void eatFood(ConsumableType consumable);
 	void damage(int value);

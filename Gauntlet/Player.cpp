@@ -2,8 +2,8 @@
 
 
 Player::Player(PlayerType type, ResourceManager* resManInit,
-	BoundsManager* boundManInit)
-	: Entity(resManInit, boundManInit),
+	BoundsManager* boundManInit, double initX, double initY)
+	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
 	  stats(createInitialStats(type))
 {
 	// Set the stats based on thew type
@@ -37,7 +37,7 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 }
 
 
-void Player::tick(double deltatime)
+void Player::tick(double deltatime, SentActions* actions)
 {
 }
 
