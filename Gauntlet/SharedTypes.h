@@ -26,9 +26,10 @@ enum class RegionType
 };
 
 
-
+// List of resource categories that can be requested by a resource holder
 enum class ResourceType
 {
+	NULL_TYPE,
 	MOVE,
 	ATTACK,
 	SPAWN,
@@ -100,13 +101,13 @@ struct UsableResource
 	// This stores either a sound or a texture
 	union Resource
 	{
-		sf::SoundBuffer* sound;
-		sf::Texture* texture;
+		sf::SoundBuffer const * sound;
+		sf::Texture const * texture;
 
-		Resource(sf::SoundBuffer* s) : sound(s) {}
-		Resource(sf::Texture* t) : texture(t) {}
+		Resource(sf::SoundBuffer const * const s) : sound(s) {}
+		Resource(sf::Texture const * const t) : texture(t) {}
 
-		~Resource();
+		~Resource() = default;
 	};
 
 	// It cannot modify any of the data not point anywhere else
@@ -140,8 +141,8 @@ struct TileRegion
 	// A simple 2d point on a plane
 	struct Point
 	{
-		double x;
-		double y;
+		unsigned char x;
+		unsigned char y;
 
 		Point(unsigned char initX, unsigned char initY)
 			: x(initX), y(initY) {}
@@ -151,6 +152,7 @@ struct TileRegion
 
 	// Used to support patterns that require multiple tiles for generation
 	// IE CHECKERBOARD_TWO_ROW / ALTERNATE
+	// See Floor::patternToTiles() for more information.
 	union RegionTile
 	{
 		Tile singleTile;
@@ -159,13 +161,12 @@ struct TileRegion
 		RegionTile(Tile tile) : singleTile(tile) {}
 		RegionTile(Tile tile[2])
 		{
-			// Just copies the array
-			// Tile is a basic class, should be fine.
-			memcpy(tileArray, tile, sizeof(tileArray));
+			tileArray[0] = tile[0];
+			tileArray[1] = tile[1];
 		}
 		RegionTile() : singleTile(Tile(Tile::TileType::NULL_TYPE)) {};
 
-		~RegionTile() {};
+		~RegionTile() = default;
 	};
 
 	Point alpha;

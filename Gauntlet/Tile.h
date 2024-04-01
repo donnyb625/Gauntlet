@@ -19,7 +19,7 @@ public:
 
 	Tile(TileType tile);
 	Tile() : type(NULL_TYPE) {}
-	~Tile();
+	~Tile() = default;
 	
 	bool tick();
 	void draw();
