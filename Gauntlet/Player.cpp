@@ -37,7 +37,7 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 }
 
 
-void Player::tick(double deltatime)
+void Player::tick(double deltatime, SentActions* actions)
 {
 }
 
