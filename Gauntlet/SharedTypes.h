@@ -164,6 +164,7 @@ enum class Action
 	SOUTH_WEST,
 	SHOOT,
 	PICKUP, // Will require further implementation, generic for now
+	MAGIC //Use stored bomb potion
 };
 
 
