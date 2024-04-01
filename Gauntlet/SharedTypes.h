@@ -14,6 +14,7 @@
 // used for compression and ease of importing from arcade to here.
 enum class RegionType
 {
+	NULL_TYPE,
 	SOLID,
 	BOX,
 	DIAGONAL_DISCONNECTED,
@@ -25,9 +26,10 @@ enum class RegionType
 };
 
 
-
+// List of resource categories that can be requested by a resource holder
 enum class ResourceType
 {
+	NULL_TYPE,
 	MOVE,
 	ATTACK,
 	SPAWN,
@@ -80,6 +82,7 @@ enum class ConsumableType
 // All the possible wall styles
 enum class WallStyle
 {
+	NULL_STYLE,
 	EXAMPLE_1
 };
 
@@ -87,6 +90,7 @@ enum class WallStyle
 // All the possible wall styles
 enum class FloorStyle
 {
+	NULL_STYLE,
 	EXAMPLE_1
 };
 
@@ -97,13 +101,13 @@ struct UsableResource
 	// This stores either a sound or a texture
 	union Resource
 	{
-		sf::SoundBuffer* sound;
-		sf::Texture* texture;
+		sf::SoundBuffer const * sound;
+		sf::Texture const * texture;
 
-		Resource(sf::SoundBuffer* s) : sound(s) {}
-		Resource(sf::Texture* t) : texture(t) {}
+		Resource(sf::SoundBuffer const * const s) : sound(s) {}
+		Resource(sf::Texture const * const t) : texture(t) {}
 
-		~Resource();
+		~Resource() = default;
 	};
 
 	// It cannot modify any of the data not point anywhere else
@@ -122,38 +126,67 @@ struct UsableResource
 // Compression we use.
 struct TileRegion
 {
+	TileRegion& operator=(const TileRegion& other)
+	{
+		if (this != &other)
+		{
+			alpha = other.alpha;
+			beta = other.beta;
+			type = other.type;
+			tiles = other.tiles;
+		}
+		return *this;
+	}
+
 	// A simple 2d point on a plane
 	struct Point
 	{
-		double x;
-		double y;
+		unsigned char x;
+		unsigned char y;
+
+		Point(unsigned char initX, unsigned char initY)
+			: x(initX), y(initY) {}
+
+		Point() : x(0), y(0) {}
 	};
 
 	// Used to support patterns that require multiple tiles for generation
 	// IE CHECKERBOARD_TWO_ROW / ALTERNATE
+	// See Floor::patternToTiles() for more information.
 	union RegionTile
 	{
-		Tile SingleTile;
-		Tile TileArray[2];
+		Tile singleTile;
+		Tile tileArray[2];
 
-		~RegionTile();
+		RegionTile(Tile tile) : singleTile(tile) {}
+		RegionTile(Tile tile[2])
+		{
+			tileArray[0] = tile[0];
+			tileArray[1] = tile[1];
+		}
+		RegionTile() : singleTile(Tile(Tile::TileType::NULL_TYPE)) {};
+
+		~RegionTile() = default;
 	};
 
-	const Point alpha;
-	const Point beta;
-	const RegionType type;
+	Point alpha;
+	Point beta;
+	RegionType type;
 	RegionTile tiles;
 
 	TileRegion(Point upperLeft, Point lowerRight,
 		RegionType pattern, RegionTile patternTile)
 		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
 		{}
+
+	TileRegion() : type(RegionType::NULL_TYPE) {};
 };
 
 
 // All of the possible actions that can be sent
 enum class Action
 {
+	NULL_ACTION,
 	NORTH,
 	SOUTH,
 	EAST,
@@ -171,8 +204,9 @@ enum class Action
 // Used for sending actions to the player when ticking
 struct SentActions
 {
-	Action const * const * const actions;
+	Action const * const actions;
 	const int SIZE;
 
-	SentActions();
+	SentActions(Action* initActions, int initSize)
+		: actions(initActions), SIZE(initSize) {}
 };

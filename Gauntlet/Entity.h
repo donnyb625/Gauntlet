@@ -11,8 +11,10 @@
 class Entity
 {
 protected:
-	Entity(ResourceManager* resourceMan, BoundsManager* boundsMan)
-		: resourceManager(resourceMan), boundsManager(boundsMan) {}
+	Entity(ResourceManager* resourceMan, BoundsManager* boundsMan,
+		sf::Vector2<double> initPos)
+		: resourceManager(resourceMan), boundsManager(boundsMan),
+		position(initPos) {}
 
 	virtual void tick(double deltatime) = 0;
 	virtual sf::Sprite draw() = 0;
@@ -23,6 +25,5 @@ protected:
 	BoundsManager* boundsManager;
 	sf::Vector2<double> position;
 	UsableResource* sounds = nullptr;
-	UsableResource* textures = nullptr;
-	sf::Sprite* animationFrames = nullptr;
+	UsableResource* texture = nullptr;
 };
