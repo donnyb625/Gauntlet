@@ -2,8 +2,8 @@
 
 
 Player::Player(PlayerType type, ResourceManager* resManInit,
-	BoundsManager* boundManInit)
-	: Entity(resManInit, boundManInit),
+	BoundsManager* boundManInit, double initX, double initY)
+	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
 	  stats(createInitialStats(type))
 {
 	// Set the stats based on thew type
@@ -37,7 +37,7 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 }
 
 
-void Player::tick(double deltatime)
+void Player::tick(double deltatime, SentActions* actions)
 {
 }
 
@@ -60,7 +60,7 @@ void Player::eatFood(ConsumableType consumable)
 	case ConsumableType::MEAT_1:
 	case ConsumableType::MEAT_2:
 	case ConsumableType::BOOZE:
-		stats.healthPoints += stats.healthGain; // Is this correct?
+		stats.healthPoints += stats.healthGain; // Is this correct? Yes
 		break;
 
 	case ConsumableType::POISON:
@@ -91,5 +91,5 @@ void Player::attack()
 
 void Player::move()
 {
-
+	
 }

@@ -8,6 +8,7 @@ public:
 	// The type of tile that should be referenced
 	enum TileType
 	{
+		NULL_TYPE, // default
 		WALL,
 		WALL_BREAKABLE,
 		TELEPORTER,
@@ -17,10 +18,14 @@ public:
 	};
 
 	Tile(TileType tile);
-	~Tile();
-
+	Tile() : type(NULL_TYPE) {}
+	~Tile() = default;
+	
 	bool tick();
 	void draw();
+	TileType getType();
 private:
+
+	TileType type;
 };
 

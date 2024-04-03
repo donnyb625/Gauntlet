@@ -1,17 +1,9 @@
 #include "Tile.h"
 
 
-Tile::Tile(TileType tile)
+Tile::Tile(TileType tile) : type(tile)
 {
-
 }
-
-
-Tile::~Tile()
-{
-
-}
-
 
 bool Tile::tick()
 {
@@ -22,4 +14,9 @@ bool Tile::tick()
 void Tile::draw()
 {
 
+}
+
+Tile::TileType Tile::getType()
+{
+	return type;
 }

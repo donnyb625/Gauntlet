@@ -2,7 +2,8 @@
 
 
 Projectile::Projectile(ProjectileType type, ResourceManager* resManInit,
-	BoundsManager* boundManInit) : Entity(resManInit, boundManInit)
+	BoundsManager* boundManInit, double initX, double initY)
+	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY))
 {
 }
 

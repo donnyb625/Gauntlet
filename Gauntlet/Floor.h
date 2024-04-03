@@ -1,25 +1,26 @@
 #pragma once
 #include "SharedTypes.h"
 #include "Entity.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Projectile.h"
-#include "TileEntity.h"
+
+#ifdef GAUNTLET_UNIT_TEST_ENV
+class FloorTestAccessor;
+#endif
 
 class Floor
 {
 public:
-	Floor(int initTotalEntities, Entity** initEntities,
+	Floor(int initTotalEntities, Entity** initEntities, int totalPlayers,
+		int initTotalTiles, TileRegion* initTiles,
 		sf::RenderWindow* initWindow, sf::Color initBG, sf::Color initFG,
 		WallStyle initWallStyle, FloorStyle initFloorStyle);
 	~Floor();
 
 	void draw();
-	void tick(double& deltatime);
+	void tick(double& deltatime, SentActions* actions);
 
 private:
-	int totalEntities;
-	Tile* tiles = nullptr;
+	int totalEntities, totalTiles, totalPlayers;
+	Tile tiles[33][33];
 	sf::RenderWindow* window = nullptr;
 	Entity** entities = nullptr;
 	sf::Color bgColor, fgColor;
@@ -28,5 +29,11 @@ private:
 
 
 	void destroyTile(Tile::TileType type, Tile tile);
-	void entityTick(double& deltatime);
+	void patternToTiles(TileRegion* patterns, int size);
+	void entityTick(double& deltatime, SentActions* actions);
+
+	
+#ifdef GAUNTLET_UNIT_TEST_ENV
+	friend class FloorTestAccessor;
+#endif
 };
