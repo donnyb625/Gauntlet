@@ -1,7 +1,8 @@
 #include "pch.h"
-#include "../Gauntlet/FileReader.h"
-#include "FloorTestAccessor.h"
 #include "../Gauntlet/SharedTypes.h"
+#include "FloorTestAccessor.h"
+#include "../Gauntlet/FileReader.h"
+#include "../Gauntlet/GameLib.h"
 
 namespace ConstructorTests
 {
@@ -89,66 +90,51 @@ namespace ConstructorTests
 	}
 }
 
-namespace FloorTests
+namespace LibTests
 {
 	// ########################################################################
-	// #                         FLOOR_TESTS
+	// #                         INPUT_TESTS
 	// ########################################################################
-	TEST(FloorTest, ConstructorInitializesPropertiesCorrectly) {
-    // Define the parameters for the Floor constructor
-    int initTotalEntities = 10;
-    Entity** initEntities = new Entity*[initTotalEntities];
-    int totalPlayers = 2;
-    int initTotalTiles = 20;
-    TileRegion* initTiles = new TileRegion[initTotalTiles];
-    sf::RenderWindow* initWindow = new sf::RenderWindow();
-    sf::Color initBG = sf::Color::Black;
-    sf::Color initFG = sf::Color::White;
-    WallStyle initWallStyle = WallStyle::EXAMPLE_1;
-    FloorStyle initFloorStyle = FloorStyle::EXAMPLE_1;
+	namespace Input
+	{
+		namespace Keyboard
+		{
+			sf::Event::KeyEvent event;
+	
+			TEST(GameLibTest, KeyActionDirection_North) {
+				event.code = sf::Keyboard::Up;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::NORTH);
+				event.code = sf::Keyboard::W;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::NORTH);
+			}
 
-    // Create a Floor object
-    Floor floor(initTotalEntities, initEntities, totalPlayers, initTotalTiles, initTiles, initWindow, initBG, initFG, initWallStyle, initFloorStyle);
+			TEST(GameLibTest, KeyActionDirection_South) {
+				event.code = sf::Keyboard::Down;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::SOUTH);
+				event.code = sf::Keyboard::S;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::SOUTH);
+			}
 
-    // Check that the properties have been initialized correctly using FloorTestAccessor
-    EXPECT_EQ(FloorTestAccessor::getTotalEntities(floor), initTotalEntities);
-    EXPECT_EQ(FloorTestAccessor::getTotalTiles(floor), initTotalTiles);
-    EXPECT_EQ(FloorTestAccessor::getBGColor(floor), initBG);
-    EXPECT_EQ(FloorTestAccessor::getFGColor(floor), initFG);
-    EXPECT_EQ(FloorTestAccessor::getWallStyle(floor), initWallStyle);
-    EXPECT_EQ(FloorTestAccessor::getFloorStyle(floor), initFloorStyle);
+			TEST(GameLibTest, KeyActionDirection_East) {
+				event.code = sf::Keyboard::Right;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::EAST);
+				event.code = sf::Keyboard::D;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::EAST);
+			}
 
-    // Clean up
-    delete[] initEntities;
-    delete[] initTiles;
-    delete initWindow;
-}
+			TEST(GameLibTest, KeyActionDirection_West) {
+				event.code = sf::Keyboard::Left;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::WEST);
+				event.code = sf::Keyboard::A;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::WEST);
+			}
 
-TEST(FloorTest, ConstructorHandlesZeroEntities) {
-    // Define the parameters for the Floor constructor
-    int initTotalEntities = 0;
-    Entity** initEntities = nullptr;
-    int totalPlayers = 0;
-    int initTotalTiles = 0;
-    TileRegion* initTiles = nullptr;
-    sf::RenderWindow* initWindow = new sf::RenderWindow();
-    sf::Color initBG = sf::Color::Black;
-    sf::Color initFG = sf::Color::White;
-    WallStyle initWallStyle = WallStyle::EXAMPLE_1;
-    FloorStyle initFloorStyle = FloorStyle::EXAMPLE_1;
-
-    // Create a Floor object
-    Floor floor(initTotalEntities, initEntities, totalPlayers, initTotalTiles, initTiles, initWindow, initBG, initFG, initWallStyle, initFloorStyle);
-
-    // Check that the properties have been initialized correctly using FloorTestAccessor
-    EXPECT_EQ(FloorTestAccessor::getTotalEntities(floor), initTotalEntities);
-    EXPECT_EQ(FloorTestAccessor::getTotalTiles(floor), initTotalTiles);
-    EXPECT_EQ(FloorTestAccessor::getBGColor(floor), initBG);
-    EXPECT_EQ(FloorTestAccessor::getFGColor(floor), initFG);
-    EXPECT_EQ(FloorTestAccessor::getWallStyle(floor), initWallStyle);
-    EXPECT_EQ(FloorTestAccessor::getFloorStyle(floor), initFloorStyle);
-
-    // Clean up
-    delete initWindow;
-}
+			TEST(GameLibTest, KeyActionDirection_Shoot) {
+				event.code = sf::Keyboard::L;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::SHOOT);
+				event.code = sf::Keyboard::Space;
+				EXPECT_EQ(GameLib::getKeyActionDirection(event), Action::SHOOT);
+			}
+		}
+	}
 }
