@@ -2,6 +2,7 @@
 #include "SharedTypes.h"
 #include "Entity.h"
 
+#define GAUNTLET_UNIT_TEST_ENV
 #ifdef GAUNTLET_UNIT_TEST_ENV
 class FloorTestAccessor;
 #endif
