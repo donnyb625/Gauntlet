@@ -142,20 +142,55 @@ namespace LibTests
 }
 
 
-/*
-* This will eventually become test cases for Player
-* 
+
+
 namespace PlayerTests
 {
-	Player::PlayerType playerType;
 
-
-	TEST(Player, WarriorStatTest)
+	//Player Initial Stat Tests
+	TEST(Player, WarriorStatsTest)
 	{
-		EXPECT_EQ(Player::PlayerStats healthPoints, 980);
-		EXPECT_EQ(Player::PlayerStats armor, 4);
-		EXPECT_EQ(Player::PlayerStats attackDamage, 5);
+		Player::PlayerStats warrior = Player::createInitialStats(Player::PlayerType::WARRIOR);
+		EXPECT_EQ(warrior.healthPoints, 980);
+		EXPECT_EQ(warrior.armor, 4);
+		EXPECT_EQ(warrior.attackDamage, 5);
+		EXPECT_EQ(warrior.healthGain, 80);
+		EXPECT_EQ(warrior.shotSpeed, 0);
+		EXPECT_EQ(warrior.magic, 1);
+		EXPECT_EQ(warrior.speed, 2);
+	}
+	TEST(Player, ElfStatsTest)
+	{
+		Player::PlayerStats elf = Player::createInitialStats(Player::PlayerType::ELF);
+		EXPECT_EQ(elf.healthPoints, 820);
+		EXPECT_EQ(elf.armor, 2);
+		EXPECT_EQ(elf.attackDamage, 2);
+		EXPECT_EQ(elf.healthGain, 120);
+		EXPECT_EQ(elf.shotSpeed, 0);
+		EXPECT_EQ(elf.magic, 3);
+		EXPECT_EQ(elf.speed, 5);
+	}
+	TEST(Player, WizardStatsTest)
+	{
+		Player::PlayerStats wizard = Player::createInitialStats(Player::PlayerType::WIZARD);
+		EXPECT_EQ(wizard.healthPoints, 800);
+		EXPECT_EQ(wizard.armor, 1);
+		EXPECT_EQ(wizard.attackDamage, 3);
+		EXPECT_EQ(wizard.healthGain, 100);
+		EXPECT_EQ(wizard.shotSpeed, 0);
+		EXPECT_EQ(wizard.magic, 5);
+		EXPECT_EQ(wizard.speed, 3);
+	}
+	TEST(Player, ValkyrieStatsTest)
+	{
+		Player::PlayerStats valkyrie = Player::createInitialStats(Player::PlayerType::VALKYRIE);
+		EXPECT_EQ(valkyrie.healthPoints, 900);
+		EXPECT_EQ(valkyrie.armor, 5);
+		EXPECT_EQ(valkyrie.attackDamage, 3);
+		EXPECT_EQ(valkyrie.healthGain, 100);
+		EXPECT_EQ(valkyrie.shotSpeed, 0);
+		EXPECT_EQ(valkyrie.magic, 2);
+		EXPECT_EQ(valkyrie.speed, 3);
 	}
 
 }
-*/

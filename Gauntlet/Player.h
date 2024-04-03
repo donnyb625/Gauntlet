@@ -3,6 +3,12 @@
 #include "Entity.h"
 #include "Animatable.h"
 
+#define GAUNTLET_UNIT_TEST_ENV
+#ifdef GAUNTLET_UNIT_TEST_ENV
+class PlayerTestAccessor;
+#endif
+
+
 class Player : public Entity, private Animatable
 {
 public:
@@ -35,7 +41,7 @@ public:
 		BoundsManager* boundManInit, double initX, double initY);
 	~Player();
 
-	PlayerStats createInitialStats(PlayerType type);
+	static PlayerStats createInitialStats(PlayerType type);
 
 	sf::Sprite draw();
 	void tick(double deltatime, SentActions* actions);
