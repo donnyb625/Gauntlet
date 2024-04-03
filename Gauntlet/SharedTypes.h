@@ -25,7 +25,7 @@ enum class RegionType
 };
 
 
-
+// The specific kind of resporce that is held.
 enum class ResourceType
 {
 	MOVE,
