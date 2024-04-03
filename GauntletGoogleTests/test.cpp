@@ -3,6 +3,8 @@
 #include "FloorTestAccessor.h"
 #include "../Gauntlet/FileReader.h"
 #include "../Gauntlet/GameLib.h"
+#include "../Gauntlet/Player.h"
+
 
 namespace ConstructorTests
 {
@@ -138,3 +140,22 @@ namespace LibTests
 		}
 	}
 }
+
+
+/*
+* This will eventually become test cases for Player
+* 
+namespace PlayerTests
+{
+	Player::PlayerType playerType;
+
+
+	TEST(Player, WarriorStatTest)
+	{
+		EXPECT_EQ(Player::PlayerStats healthPoints, 980);
+		EXPECT_EQ(Player::PlayerStats armor, 4);
+		EXPECT_EQ(Player::PlayerStats attackDamage, 5);
+	}
+
+}
+*/
