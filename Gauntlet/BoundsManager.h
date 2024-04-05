@@ -8,7 +8,7 @@ public:
 	~BoundsManager();
 
 	bool isColliding();
-	void setHitbox();
+	void setHitbox(sf::Sprite sprite);
 
 private:
 	TileRegion** regions = nullptr;
