@@ -9,6 +9,7 @@ Player::Player(PlayerType type, ResourceManager* resManInit,
 	// Set the stats based on the type
 }
 
+
 Player::~Player()
 {
 
@@ -41,11 +42,13 @@ void Player::tick(double deltatime, SentActions* actions)
 {
 }
 
+
 void Player::setActions(SentActions& newActions)
 {
 
 
 }
+
 
 sf::Sprite Player::draw()
 {
