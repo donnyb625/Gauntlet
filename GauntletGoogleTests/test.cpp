@@ -1,10 +1,13 @@
 #include "pch.h"
-#include "../Gauntlet/SharedTypes.h"
+#include "../Gauntlet/SharedTypes.cpp"
 #include "FloorTestAccessor.h"
-#include "../Gauntlet/Floor.h"
-#include "../Gauntlet/FileReader.h"
-#include "../Gauntlet/GameLib.h"
-#include "../Gauntlet/Player.h"
+#include "../Gauntlet/Floor.cpp"
+#include "../Gauntlet/FileReader.cpp"
+#include "../Gauntlet/GameLib.cpp"
+#include "../Gauntlet/Player.cpp"
+#include "../Gauntlet/Tile.cpp"
+#include "../Gauntlet/Enemy.cpp"
+#include "../Gauntlet/Projectile.cpp"
 
 
 namespace ConstructorTests
@@ -26,7 +29,7 @@ namespace ConstructorTests
 	TEST(FileReader, RawLevelData)
 	{
 		FileReader::RawLevelData raw;
-
+		 
 		EXPECT_EQ(raw.bgColor, sf::Color(0))
 			<< "Initialized with incorrect Background Color!";
 		EXPECT_EQ(raw.fgColor, sf::Color(0))
@@ -71,9 +74,9 @@ namespace ConstructorTests
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
-			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
-			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
-			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
+			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
@@ -91,9 +94,9 @@ namespace ConstructorTests
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
-			{' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
-			{' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
-			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
+			{' ', '*', ' ', '*', '*', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
+			{' ', '*', ' ', '*', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
+			{' ', ' ', ' ', '*', '*', '*', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
@@ -102,13 +105,13 @@ namespace ConstructorTests
 			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', },
 		};
 		//Check and array for patterns
-		TEST(PatternTests, Diagonal_Disconnected)
+		TEST(PatternTests, Solid)
 		{
 			TileRegion* testRegion = new TileRegion(
-				TileRegion::Point(3, 7),
-				TileRegion::Point(5, 9),
-				RegionType::DIAGONAL_DISCONNECTED,
-				TileRegion::RegionTile(Tile(Tile::AIR))
+				TileRegion::Point(8, 10),
+				TileRegion::Point(3, 5),
+				RegionType::SOLID,
+				TileRegion::RegionTile(Tile(Tile::WALL))
 			);
 			Entity** testEntities = nullptr;
 			sf::RenderWindow* testWindow = nullptr;
@@ -125,7 +128,96 @@ namespace ConstructorTests
 				FloorStyle::NULL_STYLE
 			);
 
-			Floor::patternToTiles(testRegion&, 1)
+			Tile(*tiles)[32] = FloorTestAccessor::getTiles(testFloor);
+
+			for (int i = 8; i <= 10; i++)
+			{
+				for (int j = 3; j <= 5; j++)
+				{
+					char conversion;
+
+					if (tiles[i][j].getType() == Tile::WALL)
+						conversion = '*';
+					else
+						conversion = ' ';
+				}
+			}
+		}
+		TEST(PatternTests, Box)
+		{
+			TileRegion* testRegion = new TileRegion(
+				TileRegion::Point(3, 23),
+				TileRegion::Point(6, 25),
+				RegionType::BOX,
+				TileRegion::RegionTile(Tile(Tile::WALL))
+			);
+			Entity** testEntities = nullptr;
+			sf::RenderWindow* testWindow = nullptr;
+			Floor testFloor(
+				0,
+				testEntities,
+				0,
+				1,
+				testRegion,
+				testWindow,
+				sf::Color(0),
+				sf::Color(0),
+				WallStyle::NULL_STYLE,
+				FloorStyle::NULL_STYLE
+			);
+
+			Tile(*tiles)[32] = FloorTestAccessor::getTiles(testFloor);
+
+			for (int i = 3; i <= 6; i++)
+			{
+				for (int j = 23; j <= 25; j++)
+				{
+					char conversion;
+
+					if (tiles[i][j].getType() == Tile::WALL)
+						conversion = '*';
+					else
+						conversion = ' ';
+				}
+			}
+		}
+		TEST(PatternTests, Diagonal_Disconnected)
+		{
+			TileRegion* testRegion = new TileRegion(
+				TileRegion::Point(3, 7),
+				TileRegion::Point(5, 9),
+				RegionType::DIAGONAL_DISCONNECTED,
+				TileRegion::RegionTile(Tile(Tile::WALL))
+			);
+			Entity** testEntities = nullptr;
+			sf::RenderWindow* testWindow = nullptr;
+			Floor testFloor(
+				0,
+				testEntities,
+				0,
+				1,
+				testRegion,
+				testWindow,
+				sf::Color(0),
+				sf::Color(0),
+				WallStyle::NULL_STYLE,
+				FloorStyle::NULL_STYLE
+			);
+
+			Tile(*tiles)[32] = FloorTestAccessor::getTiles(testFloor);
+
+			for (int i = 3; i <= 5; i++)
+			{
+				for (int j = 7; j <= 9; j++)
+				{
+					char conversion;
+
+					if (tiles[i][j].getType() == Tile::WALL)
+						conversion = '*';
+					else
+						conversion = ' ';
+				}
+			}
 		}
 	}
 

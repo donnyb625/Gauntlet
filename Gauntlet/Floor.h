@@ -21,7 +21,7 @@ public:
 
 private:
 	int totalEntities, totalTiles, totalPlayers;
-	Tile tiles[33][33];
+	Tile tiles[32][32];
 	sf::RenderWindow* window = nullptr;
 	Entity** entities = nullptr;
 	sf::Color bgColor, fgColor;
