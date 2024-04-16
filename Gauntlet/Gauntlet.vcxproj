@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -133,6 +133,7 @@
     <ClCompile Include="BoundsManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FileEncoder.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="BoundsManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="FileEncoder.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />

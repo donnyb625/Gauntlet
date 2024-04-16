@@ -4,6 +4,7 @@
 #include "SharedTypes.h"
 #include "TileEntity.h"
 
+class FileEncoder;
 
 // Reads either floor data into memory or reads sprite data for ResourceManager
 class FileReader
@@ -73,11 +74,12 @@ private:
 
 	FloorData floorData;
 
-	unsigned char readData();
-	unsigned short readSize();
-	unsigned int readColor();
-	void readPosition(unsigned char out[4]);
+	static unsigned char readData();
+	static unsigned short readSize();
+	static unsigned int readColor();
+	static void readPosition(unsigned char out[4]);
 
 	
+	friend class FileEncoder;
 };
 
