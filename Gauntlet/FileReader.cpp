@@ -40,7 +40,7 @@ FileReader::~FileReader()
 
 
   The file header holds the number of levels that will actually be present in
-  the file. The Level Header holds the specifics like the color schems which is
+  the file. The Level Header holds the specifics like the color schemes which is
   what colors the floor and walls will use, first 3 for walls last 3 for floor.
   Then after the color scheme we have the wall and floor styles since they are
   the only two that have varying textures; and lastly we have the number of
