@@ -1,6 +1,8 @@
 #include "Player.h"
 
 
+#include "invalid_type.h"
+
 Player::Player(PlayerType type, ResourceManager* resManInit,
 	BoundsManager* boundManInit, double initX, double initY)
 	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
@@ -40,6 +42,41 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 
 void Player::tick(double deltatime, SentActions* actions)
 {
+	for (int i = 0; i < actions->SIZE - 1; i++)
+	{
+		switch (actions->actions[i])
+		{
+		case Action::NULL_ACTION:
+			throw invalid_type("Invalid action");
+			break;
+		case Action::NORTH:
+			position.y += (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::SOUTH:
+			position.y -= (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::EAST:
+			position.x += (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::WEST:
+			position.x -= (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::NORTH_EAST:
+			//rt  2 / 2
+
+
+		case Action::SHOOT:
+
+			break;
+		case Action::PICKUP:
+			break;
+		case Action::MAGIC:
+			break;
+
+
+
+		}
+	}
 }
 
 
