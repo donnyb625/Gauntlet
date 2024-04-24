@@ -42,6 +42,8 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 
 void Player::tick(double deltatime, SentActions* actions)
 {
+	const double RT2_2 = 0.70710678118654752440084436210485;
+	
 	for (int i = 0; i < actions->SIZE - 1; i++)
 	{
 		switch (actions->actions[i])
@@ -49,6 +51,8 @@ void Player::tick(double deltatime, SentActions* actions)
 		case Action::NULL_ACTION:
 			throw invalid_type("Invalid action");
 			break;
+
+		//Directional Movement
 		case Action::NORTH:
 			position.y += (stats.speed * 16) * (deltatime / 1000);
 			break;
@@ -62,14 +66,32 @@ void Player::tick(double deltatime, SentActions* actions)
 			position.x -= (stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::NORTH_EAST:
-			//rt  2 / 2
-
-
-		case Action::SHOOT:
-
+			position.x += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			break;
+		case Action::SOUTH_EAST:
+			position.x += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::NORTH_WEST:
+			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::SOUTH_WEST:
+			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+
+		//Shoot Projectiles on a button press
+		case Action::SHOOT:
+			
+			break;
+
+		//Pickup an item when touched by player
 		case Action::PICKUP:
 			break;
+
+		//Use held potions on a button press
 		case Action::MAGIC:
 			break;
 
@@ -82,7 +104,7 @@ void Player::tick(double deltatime, SentActions* actions)
 
 void Player::setActions(SentActions& newActions)
 {
-
+	 
 
 }
 
