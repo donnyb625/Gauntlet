@@ -6,8 +6,9 @@ Player::Player(PlayerType type, ResourceManager* resManInit,
 	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
 	  stats(createInitialStats(type))
 {
-	// Set the stats based on thew type
+	// Set the stats based on the type
 }
+
 
 Player::~Player()
 {
@@ -41,11 +42,13 @@ void Player::tick(double deltatime, SentActions* actions)
 {
 }
 
+
 void Player::setActions(SentActions& newActions)
 {
 
 
 }
+
 
 sf::Sprite Player::draw()
 {

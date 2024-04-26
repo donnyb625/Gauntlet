@@ -16,9 +16,10 @@ public:
         return floor.totalTiles;
     }
 
-    //static Tile getTiles(Floor& floor) {
-    //    return &floor.tiles;
-    //}
+    static Tile(*getTiles(Floor& floor))[32]
+    {
+            return floor.tiles;
+    }
 
     static sf::RenderWindow* getWindow(Floor& floor) {
         return floor.window;

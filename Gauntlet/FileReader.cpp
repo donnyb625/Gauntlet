@@ -40,7 +40,7 @@ FileReader::~FileReader()
 
 
   The file header holds the number of levels that will actually be present in
-  the file. The Level Header holds the specifics like the color schems which is
+  the file. The Level Header holds the specifics like the color schemes which is
   what colors the floor and walls will use, first 3 for walls last 3 for floor.
   Then after the color scheme we have the wall and floor styles since they are
   the only two that have varying textures; and lastly we have the number of
@@ -122,30 +122,30 @@ FileReader::RawLevelData FileReader::readNextLevelData()
 	return floorData.levelData[floorData.currentLevel - 1];
 }
 
-unsigned char FileReader::readData()
+byte FileReader::readData()
 {
-	unsigned char result = 0;
+	byte result = 0;
 	file->read(reinterpret_cast<char*>(&result), 1); // Reading 1 byte
 	return result;
 }
 
-unsigned short FileReader::readSize()
+size FileReader::readSize()
 {
-	unsigned char buffer[2];
+	byte buffer[2];
 	file->read(reinterpret_cast<char*>(buffer), 2); // Reading 2 bytes
-	return static_cast<unsigned short>((buffer[1] << 8) | buffer[0]);
+	return static_cast<size>((buffer[1] << 8) | buffer[0]);
 }
 
-unsigned int FileReader::readColor()
+color FileReader::readColor()
 {
-	unsigned char buffer[3];
+	byte buffer[3];
 	file->read(reinterpret_cast<char*>(buffer), 3); // Reading 3 bytes
 
-	unsigned int result = buffer[0] | (buffer[1] << 8) | (buffer[2] << 16);
+	color result = buffer[0] | (buffer[1] << 8) | (buffer[2] << 16);
 	return result;
 }
 
-void FileReader::readPosition(unsigned char out[4])
+void FileReader::readPosition(byte out[4])
 {
 	file->read(reinterpret_cast<char*>(out), 4); // Reading 4 bytes
 }

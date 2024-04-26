@@ -41,6 +41,7 @@ void Enemy::tick(double& deltatime)
 {
 }
 
+
 sf::Sprite Enemy::draw()
 {
 	return sf::Sprite();

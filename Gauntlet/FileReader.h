@@ -13,7 +13,7 @@ public:
 	// Holds the raw pattern information collected from the file for rebuilding
 	struct RawPatternData
 	{
-		unsigned char positionBuffer[4];
+		byte positionBuffer[4];
 		RegionType patternType;
 		Tile::TileType tileIDs[2];
 
@@ -38,7 +38,7 @@ public:
 		sf::Color bgColor, fgColor;
 		WallStyle wallStyle;
 		FloorStyle floorStyle;
-		unsigned short totalPatterns, totalEntities;
+		size totalPatterns, totalEntities;
 
 		RawPatternData* patterns;
 		RawEntityData* entities;
@@ -60,7 +60,7 @@ private:
 	// Holds all the extracted data
 	struct FloorData
 	{
-		unsigned char totalLevels;
+		byte totalLevels;
 		int currentLevel = 0;
 
 		RawLevelData* levelData;
@@ -74,10 +74,10 @@ private:
 
 	FloorData floorData;
 
-	static unsigned char readData();
-	static unsigned short readSize();
-	static unsigned int readColor();
-	static void readPosition(unsigned char out[4]);
+	byte readData();
+	size readSize();
+	color readColor();
+	void readPosition(byte out[4]);
 
 	
 	friend class FileEncoder;

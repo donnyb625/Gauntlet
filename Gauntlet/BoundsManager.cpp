@@ -21,7 +21,7 @@ bool BoundsManager::isColliding()
 }
 
 
-void BoundsManager::setHitbox()
+void BoundsManager::setHitbox(sf::Sprite sprite)
 {
-
+	sf::FloatRect hitbox = sprite.getGlobalBounds();
 }

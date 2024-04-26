@@ -7,16 +7,23 @@ class FileEncoder
 {
 public:
 	// Construct with fstream
-	FileEncoder();
+    FileEncoder();
+    ~FileEncoder();
 
-	// update level method, takes an unsigned char for the level num
-
+    void encodeRawLevelData(FileReader::FloorData& data);
+    
 private:
-	// store pointer to stream
+    void encodeRawLevelData(FileReader::RawLevelData& data);
+    void encodePatterns(FileReader::RawPatternData* patterns, size_t totalPatterns);
+    void encodeEntities(FileReader::RawEntityData* entities, size_t totalEntities);
+    void encodeColor(sf::Color color);
+    void encodeData(byte data);
+    void encodeSize(size_t size);
+    void encodePosition(byte position[4]);
+    void encodeFloorMetadata(FileReader::RawLevelData& data);
 
 	FileReader::FloorData floorData;
 
-	// method to write file
-	// static method for converting tiles to patterns -- transform method
+    std::fstream* file;
 };
 

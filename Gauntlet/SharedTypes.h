@@ -10,6 +10,11 @@
 	pseudo-compression to lower the computational effort for collision.
 */
 
+// Used when reading and encoding files
+typedef unsigned char byte;
+typedef unsigned short size;
+typedef unsigned int color;
+
 // The type of region pattern that it will represent;
 // used for compression and ease of importing from arcade to here.
 enum class RegionType
@@ -164,7 +169,7 @@ struct TileRegion
 			tileArray[0] = tile[0];
 			tileArray[1] = tile[1];
 		}
-		RegionTile() : singleTile(Tile(Tile::TileType::NULL_TYPE)) {};
+		RegionTile() : singleTile(Tile(Tile::TileType::NULL_TYPE)) {}
 
 		~RegionTile() = default;
 	};
@@ -179,7 +184,7 @@ struct TileRegion
 		: alpha(upperLeft), beta(lowerRight), type(pattern), tiles(patternTile)
 		{}
 
-	TileRegion() : type(RegionType::NULL_TYPE) {};
+	TileRegion() : type(RegionType::NULL_TYPE) {}
 };
 
 
@@ -197,6 +202,7 @@ enum class Action
 	SOUTH_WEST,
 	SHOOT,
 	PICKUP, // Will require further implementation, generic for now
+	MAGIC //Use stored bomb potion
 };
 
 

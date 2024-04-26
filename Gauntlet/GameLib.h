@@ -1,6 +1,8 @@
 ﻿#pragma once
+
 #include "SharedTypes.h"
 #include <SFML/Window.hpp>
+
 
 namespace GameLib {
 	Action* adjustActionSize(Action* actions, int &size, bool set);

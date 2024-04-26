@@ -1,7 +1,5 @@
 #include "Game.h"
 #include "FileReader.h"
-#include "invalid_type.h"
-#include <cstdint>
 #include <iostream>
 #include "GameLib.h"
 

@@ -271,17 +271,17 @@ void Floor::destroyTile(Tile::TileType type, Tile tile)
 	{
 	//If the tile is shot by a player, destroy tile
 	case Tile::WALL_BREAKABLE:
-		tile.~Tile();
+		
 		break;
 
 	//If the trigger condition is met, destroy tile
 	case Tile::TRAP:
-		tile.~Tile();
+		
 		break;
 
 	//If the player has a key in their inventory, destroy tile
 	case Tile::DOOR:
-		tile.~Tile();
+		
 		break;
 
 	default:
