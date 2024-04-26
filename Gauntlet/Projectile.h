@@ -18,10 +18,10 @@ public:
 	};
 
 	Projectile(ProjectileType type, ResourceManager* resManInit,
-		BoundsManager* boundManInit, double initX, double initY);
+		BoundsManager* boundManInit, double initX, double initY, Direction direction);
 	~Projectile();
 
-	void tick(double& deltatime);
+	void tick(double& deltatime, Direction);
 	sf::Sprite draw();
 
 private:

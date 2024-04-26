@@ -206,6 +206,20 @@ enum class Action
 };
 
 
+enum class Direction
+{
+	NULL_DIRECTION,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
+	NORTH_EAST,
+	SOUTH_EAST,
+	NORTH_WEST,
+	SOUTH_WEST
+};
+
+
 // Used for sending actions to the player when ticking
 struct SentActions
 {

@@ -43,7 +43,9 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 void Player::tick(double deltatime, SentActions* actions)
 {
 	const double RT2_2 = 0.70710678118654752440084436210485;
-	
+	Action lastMovement;
+
+
 	for (int i = 0; i < actions->SIZE - 1; i++)
 	{
 		switch (actions->actions[i])
@@ -54,33 +56,42 @@ void Player::tick(double deltatime, SentActions* actions)
 
 		//Directional Movement
 		case Action::NORTH:
+			lastMovement = Action::NORTH;
 			position.y += (stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::SOUTH:
+			lastMovement = Action::SOUTH;
 			position.y -= (stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::EAST:
+			lastMovement = Action::EAST;
 			position.x += (stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::WEST:
+			lastMovement = Action::WEST;
 			position.x -= (stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::NORTH_EAST:
+			lastMovement = Action::NORTH_EAST;
 			position.x += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			position.y += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::SOUTH_EAST:
+			lastMovement = Action::SOUTH_EAST;
 			position.x += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::NORTH_WEST:
+			lastMovement = Action::NORTH_WEST;
 			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			position.y += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			break;
 		case Action::SOUTH_WEST:
+			lastMovement = Action::SOUTH_WEST;
 			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			break;
+		case
 
 		//Shoot Projectiles on a button press
 		case Action::SHOOT:
@@ -89,6 +100,7 @@ void Player::tick(double deltatime, SentActions* actions)
 
 		//Pickup an item when touched by player
 		case Action::PICKUP:
+
 			break;
 
 		//Use held potions on a button press

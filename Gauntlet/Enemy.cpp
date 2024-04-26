@@ -1,8 +1,9 @@
 #include "Enemy.h"
 
 Enemy::Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
-	BoundsManager* boundManInit, double initX, double initY)
-	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY))
+	BoundsManager* boundManInit, double initX, double initY, EnemyType initT)
+	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
+		type(initT)
 {
 
 }
@@ -39,6 +40,7 @@ Enemy::EnemyStats Enemy::createInitStats(EnemyType type)
 
 void Enemy::tick(double& deltatime)
 {
+	
 }
 
 

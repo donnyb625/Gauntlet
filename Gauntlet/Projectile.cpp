@@ -2,7 +2,7 @@
 
 
 Projectile::Projectile(ProjectileType type, ResourceManager* resManInit,
-	BoundsManager* boundManInit, double initX, double initY)
+	BoundsManager* boundManInit, double initX, double initY, Direction direction)
 	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY))
 {
 }
@@ -11,9 +11,17 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::tick(double& deltatime)
+void Projectile::tick(double& deltatime, Direction)
 {
-	switch()
+	ProjectileType type;
+	Direction currentDirection;
+
+	//Store which direction the character is facing
+	switch (type)
+	{
+	case ARROW || AXE || DAGGER || FIREBALL:
+		
+	}
 }
 
 sf::Sprite Projectile::draw()

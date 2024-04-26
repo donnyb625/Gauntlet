@@ -30,10 +30,12 @@ public:
 	};
 	
 	Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
-		BoundsManager* boundManInit, double initX, double initY);
+		BoundsManager* boundManInit, double initX, double initY,
+		EnemyType initT);
 	~Enemy();
 
 	EnemyStats createInitStats(EnemyType type);
+	EnemyType type;
 
 	void tick(double& deltatime);
 	sf::Sprite draw();
