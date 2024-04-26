@@ -1,6 +1,8 @@
 #include "Player.h"
 
 
+#include "invalid_type.h"
+
 Player::Player(PlayerType type, ResourceManager* resManInit,
 	BoundsManager* boundManInit, double initX, double initY)
 	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
@@ -40,12 +42,69 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 
 void Player::tick(double deltatime, SentActions* actions)
 {
+	const double RT2_2 = 0.70710678118654752440084436210485;
+	
+	for (int i = 0; i < actions->SIZE - 1; i++)
+	{
+		switch (actions->actions[i])
+		{
+		case Action::NULL_ACTION:
+			throw invalid_type("Invalid action");
+			break;
+
+		//Directional Movement
+		case Action::NORTH:
+			position.y += (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::SOUTH:
+			position.y -= (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::EAST:
+			position.x += (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::WEST:
+			position.x -= (stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::NORTH_EAST:
+			position.x += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::SOUTH_EAST:
+			position.x += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::NORTH_WEST:
+			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y += (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+		case Action::SOUTH_WEST:
+			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
+			break;
+
+		//Shoot Projectiles on a button press
+		case Action::SHOOT:
+			
+			break;
+
+		//Pickup an item when touched by player
+		case Action::PICKUP:
+			break;
+
+		//Use held potions on a button press
+		case Action::MAGIC:
+			break;
+
+
+
+		}
+	}
 }
 
 
 void Player::setActions(SentActions& newActions)
 {
-
+	 
 
 }
 

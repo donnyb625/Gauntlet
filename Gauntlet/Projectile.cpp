@@ -13,6 +13,7 @@ Projectile::~Projectile()
 
 void Projectile::tick(double& deltatime)
 {
+	switch()
 }
 
 sf::Sprite Projectile::draw()
