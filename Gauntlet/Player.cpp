@@ -42,6 +42,7 @@ Player::PlayerStats Player::createInitialStats(PlayerType type)
 
 void Player::tick(double deltatime, SentActions* actions)
 {
+	//(sqrt 2)/2
 	const double RT2_2 = 0.70710678118654752440084436210485;
 	Action lastMovement;
 
