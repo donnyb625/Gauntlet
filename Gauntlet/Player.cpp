@@ -92,7 +92,6 @@ void Player::tick(double deltatime, SentActions* actions)
 			position.x -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			position.y -= (RT2_2 * stats.speed * 16) * (deltatime / 1000);
 			break;
-		case
 
 		//Shoot Projectiles on a button press
 		case Action::SHOOT:
@@ -167,4 +166,10 @@ void Player::attack()
 void Player::move()
 {
 	
+}
+
+
+sf::Vector2<double> Player::getPosition()
+{
+	return position;
 }

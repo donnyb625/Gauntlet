@@ -38,9 +38,55 @@ Enemy::EnemyStats Enemy::createInitStats(EnemyType type)
 }
 
 
-void Enemy::tick(double& deltatime)
+void Enemy::tick(double& deltatime, sf::Vector2<double> playerPos)
 {
+	//Move on the x-axis relative to player's position
+	if (playerPos.x > position.x)
+		position.x += stats.speed * (deltatime / 1000);
+	else
+		position.x -= stats.speed * (deltatime / 1000);
+
+	//Move on the y-axis relative to player's position
+	if (playerPos.y > position.y)
+		position.y += stats.speed * (deltatime / 1000);
+	else
+		position.y -= stats.speed * (deltatime / 1000);
 	
+	//If touching player, deal damage
+
+
+	switch (type)
+	{
+	case DEMON:
+		//Fireball attack
+		break;
+
+	case GHOST:
+		//Fade on player contact
+		break;
+
+	case GRUNT:
+		//Melee
+		break;
+
+	case LOBBER:
+		//Throw rock that goes over wall and predicts player movement
+		break;
+
+	case SORCERER:
+		//Magic balls
+		break;
+
+	case THIEF:
+		//Steals items
+		break;
+
+	case DEATH:
+
+		break;
+	}
+
+
 }
 
 

@@ -51,6 +51,9 @@ public:
 	void attack();
 	void move();
 
+	sf::Vector2<double> getPosition();
+
+
 private:
 	Action** actions = nullptr;
 	PlayerStats stats;

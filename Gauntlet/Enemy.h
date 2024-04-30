@@ -37,7 +37,9 @@ public:
 	EnemyStats createInitStats(EnemyType type);
 	EnemyType type;
 
-	void tick(double& deltatime);
+	void tick(double& deltatime, sf::Vector2<double> playerPos);
 	sf::Sprite draw();
 private:
+	EnemyStats stats;
+
 };

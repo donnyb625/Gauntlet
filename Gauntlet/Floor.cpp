@@ -298,6 +298,8 @@ void Floor::entityTick(double& deltatime, SentActions* actions)
 	Projectile* isProjectile = nullptr;
 	TileEntity* isTileEntity = nullptr;
 	sf::Sprite toDraw;
+	sf::Vector2<double> playerPos;
+
 
 
 	for (int i = 0; i < totalEntities; i++)
@@ -306,7 +308,8 @@ void Floor::entityTick(double& deltatime, SentActions* actions)
 		isEnemy = dynamic_cast<Enemy*>(entities[i]);
 		isProjectile = dynamic_cast<Projectile*>(entities[i]);
 		isTileEntity = dynamic_cast<TileEntity*>(entities[i]);
-
+		
+		playerPos = isPlayer ? isPlayer->getPosition() : sf::Vector2<double>(0, 0);
 		// Is Player
 		if (isPlayer)
 		{
@@ -315,7 +318,7 @@ void Floor::entityTick(double& deltatime, SentActions* actions)
 		}
 		else if (isEnemy)
 		{
-			isEnemy->tick(deltatime);
+			isEnemy->tick(deltatime, playerPos);
 			toDraw = isEnemy->draw();
 		}
 		else if (isProjectile)
