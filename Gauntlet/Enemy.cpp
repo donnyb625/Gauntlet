@@ -1,9 +1,9 @@
 #include "Enemy.h"
 
-Enemy::Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
+Enemy::Enemy(EnemyType type, ResourceManager* resManInit,
 	BoundsManager* boundManInit, double initX, double initY, EnemyType initT)
 	: Entity(resManInit, boundManInit, sf::Vector2<double>(initX, initY)),
-		type(initT)
+	stats(createInitStats(type)), type(initT)
 {
 
 }

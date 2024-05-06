@@ -29,7 +29,7 @@ public:
 			shotSpeed(initSS) {}
 	};
 	
-	Enemy(EnemyType type, EnemyStats stats, ResourceManager* resManInit,
+	Enemy(EnemyType type, ResourceManager* resManInit,
 		BoundsManager* boundManInit, double initX, double initY,
 		EnemyType initT);
 	~Enemy();

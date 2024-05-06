@@ -46,6 +46,9 @@ void Game::start()
 		Action * actions = new Action[actionSize]; // Max of 255 entries
 		sf::Event event;
 		
+		for (int i = 0; i < actionSize; i++)
+			actions[i] = Action::NULL_ACTION;
+
 		while (window->pollEvent(event))
 		{	
 			switch (event.type)
