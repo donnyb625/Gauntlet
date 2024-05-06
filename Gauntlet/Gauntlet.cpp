@@ -1,4 +1,8 @@
 #include "Game.h"
+#include <iostream>
+#include "windows.h"
+#include "fstream"
+#include <string>
 
 
 // The entrypoint for Gauntlet
