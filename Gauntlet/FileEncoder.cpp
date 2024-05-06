@@ -1,6 +1,6 @@
 #include "FileEncoder.h"
 
-FileEncoder::FileEncoder()
+/*FileEncoder::FileEncoder()
 {
 }
 
@@ -14,4 +14,4 @@ void FileEncoder::encodeRawLevelData(FileReader::FloorData& data)
     encodeFloorMetadata(data.levelData);
     encodePatterns(data.patterns, data.size);
     encodeEntities(data.entities, data.size);
-}
+}*/

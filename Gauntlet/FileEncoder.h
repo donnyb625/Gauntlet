@@ -1,5 +1,5 @@
 #pragma once
-
+/*
 #include "FileReader.h"
 
 
@@ -26,4 +26,4 @@ private:
 
     std::fstream* file;
 };
-
+*/

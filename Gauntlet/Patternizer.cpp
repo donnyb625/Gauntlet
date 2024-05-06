@@ -1,4 +1,5 @@
-﻿#include "Patternizer.h"
+﻿/*
+#include "Patternizer.h"
 
 #include <iostream>
 
@@ -394,3 +395,4 @@ std::set<TileRegion>* Patternizer::findBoxes(
 
     // 
 }
+*/
