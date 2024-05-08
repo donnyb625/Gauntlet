@@ -106,9 +106,6 @@ void Player::tick(double deltatime, SentActions* actions)
 		//Use held potions on a button press
 		case Action::MAGIC:
 			break;
-
-
-
 		}
 	}
 }
@@ -116,8 +113,8 @@ void Player::tick(double deltatime, SentActions* actions)
 
 void Player::setActions(SentActions& newActions)
 {
-	 
-
+	for (int i = 0; i < newActions.SIZE; i++)
+		actions[i] = newActions.actions[i];
 }
 
 

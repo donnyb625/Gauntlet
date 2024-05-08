@@ -55,6 +55,6 @@ public:
 
 
 private:
-	Action** actions = nullptr;
+	Action* actions = nullptr;
 	PlayerStats stats;
 };
